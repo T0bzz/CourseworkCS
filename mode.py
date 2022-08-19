@@ -1,11 +1,14 @@
-
+from table import Table
 
 class Mode:
-    def __init__(self, engine, number, screen, display_surface):
+    def __init__(self, game, engine, number, screen, display_surface):
+        self.game = game
         self.engine = engine
         self.number = number
         self.screen = screen
         self.display_surface = display_surface
+        
+        self.table = Table()
 
         self.entities = []
         self.particles = []
@@ -22,3 +25,4 @@ class Mode:
 
     def draw(self):
         pass
+

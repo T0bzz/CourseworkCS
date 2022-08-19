@@ -12,23 +12,25 @@ class Game:
         self.current_mode_num = 0
         self.current_mode = None
         self.engine = Engine()
-        self.screen = self.screen
-        self.display_surface = self.display_surface
+        self.screen = screen
+        self.display_surface = display_surface
     
     def start(self):
-        print("Start")
-        self.current_mode = MainMenu(self.screen, self.display_surface)
+        self.current_mode = MainMenu(self, self.screen, self.display_surface, self.engine)
         
 
     def update(self):
+        self.engine.update()
         pygame.display.set_caption(
             "{:.2f}".format(self.engine.clock.get_fps()))
+        self.events()
         if self.current_mode is not None:
-            print("if")
-            self.current_mode.global_update()
+            self.current_mode.standard()
+        
+        
 
     def events(self):
-        for event in pygame.get_event():
+        for event in pygame.event.get():
             if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 if debug:
                     stats = pstats.Stats(self.pr)

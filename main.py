@@ -8,15 +8,16 @@ display_surface = pygame.Surface((DS_WIDTH, DS_HEIGHT))
 
 pygame.init()
 
+
 def main(pr=None):
-    game = Game(pr)
+    game = Game(pr, screen, display_surface)
     running = True
-    game.start(screen, display_surface)
+    game.start()
     while running:
         game.update()
 
 
-if __name__ == '_main_':
+if __name__ == '__main__':
     if debug == True:
         with cProfile.Profile() as pr:
             main(pr)
