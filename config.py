@@ -12,6 +12,8 @@ PURPLE = (255, 0, 255)
 RED = (255, 0, 0)
 WHITE = (255, 255, 255)
 BROWN = (165, 42, 42)
+YELLOW = (255,255,0)
+ORANGE = (255, 191, 0)
 
 # Button Colours
 LIGHT_COLOUR = (170, 170, 170)
@@ -32,6 +34,29 @@ debug = False
 GAME_FOLDER = path.dirname(__file__)
 ASSETS_FOLDER = path.join(GAME_FOLDER, "assets")
 BUTTONS_FOLDER = path.join(ASSETS_FOLDER, "buttonImages")
+TABLE_FOLDER = path.join(ASSETS_FOLDER, "table")
+POCKET_FOLDER = path.join(ASSETS_FOLDER, "pocket")
+CUEBALL_FOLDER = path.join(ASSETS_FOLDER, "cueball")
 
 BUTTONS = {}
+TABLE_IMAGE = {}
+
+# Values for balls (number, radius, friction and font)
+# Need each colour twice for strips and solids (Excep black)
+COLOUR = [YELLOW, BLUE, RED, PURPLE, ORANGE, GREEN, BROWN,
+          BLACK, WHITE, YELLOW, BLUE, RED, PURPLE, ORANGE, GREEN, BROWN]
+RADIUS = 0.5
+FRICTION = 1
+BALL_FONT = ("Agency FB", 10)
+balls_potted = []
+balls_notpotted = 15
+
+
+#  Values needed for the pool table
+RECT_HEIGHT = 600
+CUSHIONS = 30
+MARGIN = 30
+
+#Cueball
+CUEBALL_RADIUS = 5
 

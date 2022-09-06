@@ -1,4 +1,5 @@
 from table import Table
+from config import *
 
 class Mode:
     def __init__(self, game, engine, number, screen, display_surface):
