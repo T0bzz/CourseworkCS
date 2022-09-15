@@ -60,3 +60,7 @@ MARGIN = 30
 #Cueball
 CUEBALL_RADIUS = 5
 
+#Variables for input box
+COLOUR_OFF = WHITE
+COLOUR_ON = YELLOW
+INPUT_FONT = ("Agency FB", 10)
