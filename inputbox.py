@@ -1,7 +1,8 @@
-import tkinter as tk 
+import tkinter as tk
+
 
 class Tk(tk.Tk):
-    def __init__(self,*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
         self.title = "Input Equation"
         self.geometry = ("360x150")
@@ -21,6 +22,7 @@ class Tk(tk.Tk):
         self.active_frame = frame
         frame.tkraise()
 
+
 class Input(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -32,10 +34,6 @@ class Input(tk.Frame):
         entry_equation = tk.Entry(self, textvariable=equation, width=20)
         entry_equation.grid(column=1, row=0)
 
-        button_submit = tk.Button(self, text='Submit', command=lambda: self.Input(parent, controller, equation.get()))
-        button_submit.grid(column = 1, row = 2)
-
-
-    
-
-
+        button_submit = tk.Button(self, text='Submit', command=lambda: self.Input(
+            parent, controller, equation.get()))
+        button_submit.grid(column=1, row=2)

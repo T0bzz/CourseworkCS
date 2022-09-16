@@ -1,8 +1,5 @@
-from math import *
-from pygame import *
-from inputbox import *
+#from manim import *
 
-
-class Math:
-    def __init__(self):
-        pass
+#class testing(scene):
+ #   def construct(self):
+  #      pass
