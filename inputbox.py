@@ -1,6 +1,6 @@
 import tkinter as tk 
 
-class Tk:
+class Tk(tk.Tk):
     def __init__(self,*args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
         self.title = "Input Equation"
@@ -13,11 +13,11 @@ class Tk:
         self.frames = {}
         frame = Input(container, self)
         self.frames[Input] = frame
-        frame.grid(row=0, coloumn=0, sticky="nsew")
+        frame.grid(row=0, column=0, sticky="nsew")
         self.show_frame(Input)
 
     def show_frame(self, cont):
-        frame = self.frame[cont]
+        frame = self.frames[cont]
         self.active_frame = frame
         frame.tkraise()
 
@@ -28,7 +28,7 @@ class Input(tk.Frame):
         equation = tk.StringVar()
 
         label_equation = tk.Label(self, text='Equation')
-        label_equation = tk.grid(row=0, column=0, padx=5, pady=5)
+        label_equation.grid(row=0, column=0, padx=5, pady=5)
         entry_equation = tk.Entry(self, textvariable=equation, width=20)
         entry_equation.grid(column=1, row=0)
 
