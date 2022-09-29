@@ -45,8 +45,8 @@ TABLE_IMAGE = {}
 # Need each colour twice for strips and solids (Excep black)
 COLOUR = [YELLOW, BLUE, RED, PURPLE, ORANGE, GREEN, BROWN,
           BLACK, WHITE, YELLOW, BLUE, RED, PURPLE, ORANGE, GREEN, BROWN]
-RADIUS = 0.5
-FRICTION = 1
+RADIUS = 5
+FRICTION = 0
 BALL_FONT = ("Agency FB", 10)
 balls_potted = []
 balls_notpotted = 15

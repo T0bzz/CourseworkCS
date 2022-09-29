@@ -18,7 +18,7 @@ def main(pr=None):
 
 
 if __name__ == '__main__':
-    if debug == True:
+    if debug:
         with cProfile.Profile() as pr:
             main(pr)
     else:
