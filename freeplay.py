@@ -6,7 +6,6 @@ from math import cos, radians
 from table import Table
 from pocket import Pocket
 from cueball import Cueball
-from inputbox import Tk
 
 
 
@@ -18,12 +17,9 @@ class Freeplay(Mode):
         self.screen = screen
         self.display_surface = display_surface
         self.table = Table(display_surface, 0, 0)
-        self.tkwindow = Tk()
         
 
     def standard(self):
-        self.tkwindow.update_idletasks()
-        self.tkwindow.update()
         self.draw()
 
     def draw(self):

@@ -1,5 +1,5 @@
 import os
-import pygame
+from pygame.font import SysFont, init
 import codecs
 from os import path
 
@@ -63,4 +63,8 @@ CUEBALL_RADIUS = 5
 #Variables for input box
 COLOUR_OFF = WHITE
 COLOUR_ON = YELLOW
-INPUT_FONT = ("Agency FB", 10)
+
+init()
+INPUT_FONT = SysFont(None, 32)
+
+
