@@ -3,6 +3,7 @@ from config import *
 
 from pygame.time import Clock
 
+
 class Engine:
     def __init__(self):
         self.clock = Clock()

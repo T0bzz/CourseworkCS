@@ -26,12 +26,11 @@ class Game:
         self.events()
         if self.current_mode is not None:
             self.current_mode.standard()
-        
-        
 
     def events(self):
         for event in pygame.event.get():
-            if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+            self.current_mode.input_handler(event)
+            if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
                 if debug:
                     stats = pstats.Stats(self.pr)
                     stats.sort_stats(pstats.SortKey.TIME)

@@ -27,6 +27,9 @@ class MainMenu:
         self.buttons.append(Button(885, 550, BUTTONS["Levels"]))
         self.buttons.append(Button(885, 700, BUTTONS["Settings"]))
 
+    def input_handler(self, event):
+        return
+
     def standard(self):
         self.update()
         self.draw()
