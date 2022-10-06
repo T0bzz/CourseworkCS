@@ -11,17 +11,27 @@ class Table:
     def __init__(self, engine, display_surface, x, y):
         self.x = x
         self.y = y
+        self.cushions = [Cushion(CUSHION1), Cushion(CUSHION2), Cushion(
+            CUSHION3), Cushion(CUSHION4), Cushion(CUSHION5), Cushion(CUSHION6)]
         self.space = pymunk.Space()
-        self.space.gravity = (0, 0)
-        self.space.fricton = 100
         self.engine = engine
         self.display_surface = display_surface
         self.image = pygame.image.load(
             path.join(TABLE_FOLDER, "Table.png")).convert_alpha()
         self.cueball = Cueball(260 - CUEBALL_RADIUS * 2,
                                209 - CUEBALL_RADIUS * 2, 1, 0.5)
+        self.box_x, self.box_y = BOX_COORDS
+        self.Box_body = pymunk.body()
+        self.Box_shape = pymunk.Segment(self.body, self.x, self.y, 5)
+        self.Box_shape.friction = 10
+        
 
+        self.space.add(self.Box_body, self.Box_shape)
+        self.space.add(self)
         self.space.add(self.cueball.body, self.cueball.shape)
+        for cushion in self.cushions:
+            self.space.add(cushion.body, cushion.shape)
+
         self.input_box = Inputbox()
 
     def input_handler(self, event):
@@ -29,7 +39,6 @@ class Table:
 
     def draw(self):
         self.display_surface.blit(self.image, (self.x, self.y))
-        print(self.cueball.body.position)
         self.display_surface.blit(
             self.cueball.image, (int(self.cueball.body.position.x), int(self.cueball.body.position.y)))
         text = INPUT_FONT.render(
@@ -37,6 +46,6 @@ class Table:
         self.display_surface.blit(text, text.get_rect())
 
     def update(self):
-        self.cueball.body.apply_impulse_at_local_point((5, 0))
-        self.space.step(self.engine.dt)
-        #self.cueball.move(self.input_box.eq)
+        print(self.cueball.body.velocity)
+        self.space.step(1)
+        # self.cueball.move(self.input_box.eq)

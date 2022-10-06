@@ -25,7 +25,7 @@ DS_WIDTH, DS_HEIGHT = 720, 405
 SF = WIDTH / DS_WIDTH
 
 # FPS
-FPS = 120
+FPS = 60
 
 # debug
 debug = False
@@ -58,7 +58,7 @@ CUSHIONS = 30
 MARGIN = 30
 
 #Cueball
-CUEBALL_RADIUS = 5
+CUEBALL_RADIUS = 10
 
 #Variables for input box
 COLOUR_OFF = WHITE
@@ -66,5 +66,24 @@ COLOUR_ON = YELLOW
 
 init()
 INPUT_FONT = SysFont(None, 32)
+
+
+#Cushions coords
+
+#Left side
+CUSHION1 = (146, 110), (146, 295)
+#Top left
+CUSHION2 = (167, 95), (350, 103)
+#Top Right
+CUSHION3 = (369, 95), (552, 103)
+#Right side
+CUSHION4 = (560, 110), (560, 295)
+#Bottom right
+CUSHION5 = (369, 302), (552, 310)
+#Bottom left
+CUSHION6 = (167, 302), (350, 310)
+
+#Backdround box for table friction
+BOX_COORDS = (0, 0), (700, 700)
 
 
