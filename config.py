@@ -1,5 +1,6 @@
 import os
 from pygame.font import SysFont, init
+import pygame
 import codecs
 from os import path
 
@@ -37,6 +38,7 @@ BUTTONS_FOLDER = path.join(ASSETS_FOLDER, "buttonImages")
 TABLE_FOLDER = path.join(ASSETS_FOLDER, "table")
 POCKET_FOLDER = path.join(ASSETS_FOLDER, "pocket")
 CUEBALL_FOLDER = path.join(ASSETS_FOLDER, "cueball")
+BALL_FOLDER = path.join(ASSETS_FOLDER, "balls")
 
 BUTTONS = {}
 TABLE_IMAGE = {}
@@ -71,19 +73,27 @@ INPUT_FONT = SysFont(None, 32)
 #Cushions coords
 
 #Left side
-CUSHION1 = (146, 110), (146, 295)
+CUSHION1 = (151, 110), (151, 295)
 #Top left
-CUSHION2 = (167, 95), (350, 103)
+CUSHION2 = (167, 103), (350, 103)
 #Top Right
-CUSHION3 = (369, 95), (552, 103)
+CUSHION3 = (369, 103), (552, 103)
 #Right side
-CUSHION4 = (560, 110), (560, 295)
+CUSHION4 = (559, 110), (559, 295)
 #Bottom right
-CUSHION5 = (369, 302), (552, 310)
+CUSHION5 = (369, 302), (552, 302)
 #Bottom left
-CUSHION6 = (167, 302), (350, 310)
+CUSHION6 = (167, 302), (350, 302)
 
 #Backdround box for table friction
-BOX_COORDS = (0, 0), (700, 700)
+BOX_COORDS = (0, 0), (650, 370)
 
+#Slowing cueball down
+SLOW_BALL = pygame.time.get_ticks() + 1 * 1000
+
+#Ball positions
+
+#Red balls
+RED_BALL1= (447, 204)
+#RED_BALL2 = ()
 
