@@ -1,11 +1,10 @@
 import pygame
 from mode import Mode
 from config import *
-from ball import Ball
 from math import cos, radians
 from table import Table
 from pocket import Pocket
-from cueball import Cueball
+from ball import Cueball
 
 
 class Freeplay:

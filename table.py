@@ -3,8 +3,7 @@ from sympy import yn
 from config import *
 from pocket import Pocket
 from cushion import Cushion
-from ball import Ball
-from cueball import Cueball
+from ball import Cueball
 from inputbox import Inputbox
 import pymunk
 
@@ -20,15 +19,9 @@ class Table:
         self.display_surface = display_surface
         self.image = pygame.image.load(
             path.join(TABLE_FOLDER, "Table.png")).convert_alpha()
-        self.cueball = Cueball(260 - CUEBALL_RADIUS * 2,
-                               209 - CUEBALL_RADIUS * 2, 1, 0.5, 10)
-        self.box_x, self.box_y = BOX_COORDS
-        self.Box_body = pymunk.Body()
-        self.Box_shape = pymunk.Segment(
-            self.Box_body, self.box_x, self.box_y, 5)
-        self.Box_shape.friction = 1000
+        self.cueball = Cueball(260 - CUEBALL_RADIUS * 2, 209 - CUEBALL_RADIUS * 2, 1, 0.5, 10)
+        
 
-        self.space.add(self.Box_body, self.Box_shape)
         self.space.add(self.cueball.body, self.cueball.shape)
         for cushion in self.cushions:
             self.space.add(cushion.body, cushion.shape)

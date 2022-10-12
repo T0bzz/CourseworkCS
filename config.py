@@ -26,7 +26,7 @@ DS_WIDTH, DS_HEIGHT = 720, 405
 SF = WIDTH / DS_WIDTH
 
 # FPS
-FPS = 60
+FPS = 120
 
 # debug
 debug = False
@@ -60,7 +60,7 @@ CUSHIONS = 30
 MARGIN = 30
 
 #Cueball
-CUEBALL_RADIUS = 10
+CUEBALL_RADIUS = 5
 
 #Variables for input box
 COLOUR_OFF = WHITE
@@ -68,8 +68,6 @@ COLOUR_ON = YELLOW
 
 init()
 INPUT_FONT = SysFont(None, 32)
-
-
 #Cushions coords
 
 #Left side
@@ -90,10 +88,4 @@ BOX_COORDS = (0, 0), (650, 370)
 
 #Slowing cueball down
 SLOW_BALL = pygame.time.get_ticks() + 1 * 1000
-
-#Ball positions
-
-#Red balls
-RED_BALL1= (447, 204)
-#RED_BALL2 = ()
 

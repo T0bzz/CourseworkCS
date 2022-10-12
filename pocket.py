@@ -1,6 +1,5 @@
 import pygame
 from config import *
-from ball import Ball
 
 
 class Pocket:
