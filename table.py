@@ -2,7 +2,7 @@ import pygame
 from config import *
 from pocket import Pocket
 from cushion import Cushion
-from ball import Cueball
+from ball import Cueball, Red_Ball
 from inputbox import Inputbox
 import pymunk
 
@@ -18,10 +18,12 @@ class Table:
         self.display_surface = display_surface
         self.image = pygame.image.load(
             path.join(TABLE_FOLDER, "Table.png")).convert_alpha()
-        self.cueball = Cueball(260 - CUEBALL_RADIUS * 2, 209 - CUEBALL_RADIUS * 2, 1, 0.5, 10)
+        self.cueball = Cueball(260 - CUEBALL_RADIUS * 2, 209 - CUEBALL_RADIUS * 2, 1, 0.5, 5)
+        self.redball = Red_Ball(RED1, 1, 0.5, 0)
         
 
         self.space.add(self.cueball.body, self.cueball.shape)
+        self.space.add(self.redball.body, self.redball.shape)
         for cushion in self.cushions:
             self.space.add(cushion.body, cushion.shape)
 
@@ -34,6 +36,7 @@ class Table:
         self.display_surface.blit(self.image, (self.x, self.y))
         self.display_surface.blit(
             self.cueball.image, (int(self.cueball.body.position.x), int(self.cueball.body.position.y)))
+        self.display_surface.blit(self.redball.image, (int(self.redball.body.position.x), int(self.redball.body.position.y)))
         text = INPUT_FONT.render(
             self.input_box.eq, True, pygame.Color("turquoise"))
         self.display_surface.blit(text, text.get_rect())
@@ -41,6 +44,8 @@ class Table:
     def update(self):
         self.cueball.speed_down()
         self.cueball.slow_down()
+        self.redball.speed_down()
+        self.redball.slow_down()
         print(self.cueball.body.velocity)
         self.space.step(1)
         # self.cueball.move(self.input_box.eq)
