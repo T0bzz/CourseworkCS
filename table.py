@@ -1,5 +1,4 @@
 import pygame
-from sympy import yn
 from config import *
 from pocket import Pocket
 from cushion import Cushion
