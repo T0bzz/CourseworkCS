@@ -23,6 +23,8 @@ class Table:
         self.redballs = [Red_Ball(RED1, 1, 0.5, 1), Red_Ball(RED2, 1, 0.5, 1), Red_Ball(RED3, 1, 0.5, 1), Red_Ball(RED4, 1, 0.5, 1), Red_Ball(RED5, 1, 0.5, 1), Red_Ball(RED6, 1, 0.5, 1), Red_Ball(RED7, 1, 0.5, 1)]
         self.yellowballs = [Yellow_Ball(Yellow1, 1, 0.5, 1), Yellow_Ball(Yellow2, 1, 0.5, 1), Yellow_Ball(Yellow3, 1, 0.5, 1), Yellow_Ball(Yellow4, 1, 0.5, 1), Yellow_Ball(Yellow5, 1, 0.5, 1), Yellow_Ball(Yellow6, 1, 0.5, 1), Yellow_Ball(Yellow7, 1, 0.5, 1)]
         self.blackball = Black_Ball(Black1, 1, 0.5, 1)
+        self.c_pockets = [CPocket(CP_TL), CPocket(CP_TR), CPocket(CP_BL), CPocket(CP_BR)]
+        self.m_pockets = [MPocket(MP_T), MPocket(MP_B)]
 
 
         self.space.add(self.cueball.body, self.cueball.shape)
@@ -33,6 +35,10 @@ class Table:
             self.space.add(redball.body, redball.shape)
         for yellowball in self.yellowballs:
             self.space.add(yellowball.body, yellowball.shape)
+        for pocket in self.c_pockets:
+            self.space.add(pocket.body, pocket.shape)
+        for pocket in self.m_pockets:
+            self.space.add(pocket.body, pocket.shape)
 
         self.input_box = Inputbox()
 

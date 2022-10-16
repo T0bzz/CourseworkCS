@@ -110,8 +110,14 @@ Yellow7 = (511, 222)
 #Black ball Coord
 Black1 = (492, 202)
 
-#Corner pocket radius
+#Corner pocket radius, coords
 CP_RADIUS = 17
+CP_TL = (150, 93)
+CP_TR = (560, 93)
+CP_BL = (150, 312)
+CP_BR = (560, 312)
 
-#Middle pocket radius
+#Middle pocket radius, coords
 MP_RADIUS = 13.5
+MP_T = (560, 85)
+MP_B = (560, 320)
