@@ -86,6 +86,11 @@ CUSHION6 = (167, 302), (350, 302)
 #Backdround box for table friction
 BOX_COORDS = (0, 0), (650, 370)
 
-#Slowing cueball down
-SLOW_BALL = pygame.time.get_ticks() + 1 * 1000
+#Slowing balls down
+SLOW_WHITE = pygame.time.get_ticks() + 1 * 1000
+SLOW_RED = pygame.time.get_ticks() + 1 * 1000
+SLOW_YELLOW = pygame.time.get_ticks() + 1 * 1000
+SLOW_BLACK = pygame.time.get_ticks() + 1 * 1000
 
+#Red ball coords
+RED1 = (460, 202)
