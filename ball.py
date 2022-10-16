@@ -74,15 +74,16 @@ class Ball(Cueball):
            self.x, self.y = temp_pos  # Dont move if equation is invalid
     
 class Red_Ball(Cueball):
-    def __init__(self, position, mass, moment, speed):
-        self.x, self.y = position
-        self.speed = speed
+    def __init__(self, x, y, mass, moment):
+        super().__init__(x, y, mass, moment)
+        self.x = x
+        self.y = y
         self.body = pymunk.Body(mass, moment)
         self.shape = pymunk.Circle(self.body, CUEBALL_RADIUS)
         self.image = pygame.image.load(path.join(BALL_FOLDER, "Redball.png"))
-        self.shape.elasticity = 0.8
+        self.shape.elasticity = 1
         self.body.velocity = (0, 0)
-        self.body.position = (position)
+        self.shape.friction = 10
 
     def slow_down(self):
         self.body.velocity = self.body.velocity.normalized() 

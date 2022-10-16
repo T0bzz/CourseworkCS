@@ -89,6 +89,3 @@ BOX_COORDS = (0, 0), (650, 370)
 #Slowing cueball down
 SLOW_BALL = pygame.time.get_ticks() + 1 * 1000
 
-#Red ball coords
-RED1 = (458, 209 - CUEBALL_RADIUS * 2)
-
