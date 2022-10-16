@@ -2,8 +2,11 @@ import pygame
 from config import *
 from pocket import Pocket
 from cushion import Cushion
+<<<<<<< HEAD
 from ball import Cueball, Red_Ball
 from ball import Ball
+=======
+>>>>>>> parent of 33e1d2a (Red ball)
 from ball import Cueball
 from inputbox import Inputbox
 import pymunk
