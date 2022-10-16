@@ -2,19 +2,14 @@ import pygame
 from config import *
 
 
-class Pocket:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
+class CPocket:
+    def __init__(self, position):
+        self.x, self.y = position
+        self.body = pymunk.Body()
+        self.body = pymunk.Circle(self.body, CP_RADIUS)
 
-    def check_pot(self):
-        balls = balls_potted[:]
-        for i in range(len(balls_potted)):
-            dist = ((self.x - balls_potted[i].x) **
-                    2 + (self.y - balls_potted[i].y)**2)**0.5
-            if dist < self.r + RADIUS:
-                if balls_potted[i] in balls:
-                    if balls_potted[i].ball_num == 8:
-                        pass
-                    else:
-                        balls.remove(balls_potted[i])
+class MPocket(CPocket):
+    def __init__(self, position):
+        self.x, self.y = position
+        self.body = pymunk.Body()
+        self.body = pymunk.Circle(self.body, MP_RADIUS)

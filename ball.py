@@ -22,7 +22,7 @@ class Cueball:
 
     def speed_down(self):
         if self.speed >= 0.01:
-            if SLOW_WHITE <= pygame.time.get_ticks() + 1 * 1000:
+            if SLOW_BALL <= pygame.time.get_ticks() + 1 * 1000:
                 self.speed -= 0.045
                 if abs(self.body.velocity) < 0.036:
                     self.body.velocity = (0, 0)
@@ -44,7 +44,8 @@ class Red_Ball(Cueball):
         self.body = pymunk.Body(mass, moment)
         self.shape = pymunk.Circle(self.body, CUEBALL_RADIUS)
         self.image = pygame.image.load(path.join(BALL_FOLDER, "Redball.png"))
-        self.elasticity = 0.8
+        self.shape.density = 10000000
+        self.shape.elasticity = 1.2
         self.velocity = (0, 0)
         self.body.position = (position)
 
@@ -53,8 +54,60 @@ class Red_Ball(Cueball):
 
     def speed_down(self):
         if self.speed >= 0.001:
-            if SLOW_RED <= pygame.time.get_ticks() + 1 * 1000:
-                self.speed -= 0.005
+            if SLOW_BALL <= pygame.time.get_ticks() + 1 * 1000:
+                self.speed -= 0.004
+                if abs(self.body.velocity) < 0.0036:
+                    self.body.velocity = (0, 0)
+            
+    def move():
+        pass
+
+
+
+class Yellow_Ball(Cueball):
+    def __init__(self, position, mass, moment, speed):
+        self.x, self.y = position
+        self.speed = speed
+        self.body = pymunk.Body(mass, moment)
+        self.shape = pymunk.Circle(self.body, CUEBALL_RADIUS)
+        self.image = pygame.image.load(path.join(BALL_FOLDER, "Yellowball.png"))
+        self.shape.elasticity = 1.2
+        self.shape.density = 10000000
+        self.velocity = (0, 0)
+        self.body.position = (position)
+
+    def slow_down(self):
+        self.body.velocity = self.body.velocity.normalized() * self.speed
+
+    def speed_down(self):
+        if self.speed >= 0.001:
+            if SLOW_BALL <= pygame.time.get_ticks() + 1 * 1000:
+                self.speed -= 0.004
+                if abs(self.body.velocity) < 0.0036:
+                    self.body.velocity = (0, 0)
+            
+    def move():
+        pass
+
+class Black_Ball(Cueball):
+    def __init__(self, position, mass, moment, speed):
+        self.x, self.y = position
+        self.speed = speed
+        self.body = pymunk.Body(mass, moment)
+        self.shape = pymunk.Circle(self.body, CUEBALL_RADIUS)
+        self.image = pygame.image.load(path.join(BALL_FOLDER, "Blackball.png"))
+        self.shape.elasticity = 1.2
+        self.shape.density = 10000000
+        self.velocity = (0, 0)
+        self.body.position = (position)
+
+    def slow_down(self):
+        self.body.velocity = self.body.velocity.normalized() * self.speed
+
+    def speed_down(self):
+        if self.speed >= 0.001:
+            if SLOW_BALL <= pygame.time.get_ticks() + 1 * 1000:
+                self.speed -= 0.004
                 if abs(self.body.velocity) < 0.0036:
                     self.body.velocity = (0, 0)
             

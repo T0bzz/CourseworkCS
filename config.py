@@ -87,10 +87,31 @@ CUSHION6 = (167, 302), (350, 302)
 BOX_COORDS = (0, 0), (650, 370)
 
 #Slowing balls down
-SLOW_WHITE = pygame.time.get_ticks() + 1 * 1000
-SLOW_RED = pygame.time.get_ticks() + 1 * 1000
-SLOW_YELLOW = pygame.time.get_ticks() + 1 * 1000
-SLOW_BLACK = pygame.time.get_ticks() + 1 * 1000
+SLOW_BALL = pygame.time.get_ticks() + 1 * 1000
 
 #Red ball coords
-RED1 = (460, 202)
+RED1 = (483, 207)
+RED2 = (492, 193)
+RED3 = (501, 217)
+RED4 = (501, 197)
+RED5 = (511, 183)
+RED6 = (511, 202)
+RED7 = (511, 212)
+
+#Yellow ball coords
+Yellow1 = (474, 202)
+Yellow2 = (483, 197)
+Yellow3 = (492, 212)
+Yellow4 = (502, 207)
+Yellow5 = (504, 187)
+Yellow6 = (511, 193)
+Yellow7 = (511, 222)
+
+#Black ball Coord
+Black1 = (492, 202)
+
+#Corner pocket radius
+CP_RADIUS = 17
+
+#Middle pocket radius
+MP_RADIUS = 13.5

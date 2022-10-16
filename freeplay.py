@@ -3,7 +3,7 @@ from mode import Mode
 from config import *
 from math import cos, radians
 from table import Table
-from pocket import Pocket
+from pocket import CPocket, MPocket
 from ball import Cueball
 
 
