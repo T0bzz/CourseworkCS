@@ -45,7 +45,7 @@ class Red_Ball(Cueball):
         self.shape = pymunk.Circle(self.body, CUEBALL_RADIUS)
         self.image = pygame.image.load(path.join(BALL_FOLDER, "Redball.png"))
         self.shape.density = 10000000
-        self.shape.elasticity = 1.2
+        self.shape.elasticity = 3
         self.velocity = (0, 0)
         self.body.position = (position)
 
@@ -71,7 +71,7 @@ class Yellow_Ball(Cueball):
         self.body = pymunk.Body(mass, moment)
         self.shape = pymunk.Circle(self.body, CUEBALL_RADIUS)
         self.image = pygame.image.load(path.join(BALL_FOLDER, "Yellowball.png"))
-        self.shape.elasticity = 1.2
+        self.shape.elasticity = 3
         self.shape.density = 10000000
         self.velocity = (0, 0)
         self.body.position = (position)
@@ -96,7 +96,7 @@ class Black_Ball(Cueball):
         self.body = pymunk.Body(mass, moment)
         self.shape = pymunk.Circle(self.body, CUEBALL_RADIUS)
         self.image = pygame.image.load(path.join(BALL_FOLDER, "Blackball.png"))
-        self.shape.elasticity = 1.2
+        self.shape.elasticity = 3
         self.shape.density = 10000000
         self.velocity = (0, 0)
         self.body.position = (position)
