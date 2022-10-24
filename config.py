@@ -60,7 +60,7 @@ CUSHIONS = 30
 MARGIN = 30
 
 #Cueball
-BALL_RADIUS = 5
+CUEBALL_RADIUS = 5
 
 #Variables for input box
 COLOUR_OFF = WHITE
@@ -90,15 +90,6 @@ BOX_COORDS = (0, 0), (650, 370)
 SLOW_BALL = pygame.time.get_ticks() + 1 * 1000
 
 #Red ball coords
-RED_BALLS = [
-    (483, 207),
-    (492, 193),
-    (501, 217),
-    (501, 197),
-    (511, 183),
-    (511, 202),
-    (511, 212)
-]
 RED1 = (483, 207)
 RED2 = (492, 193)
 RED3 = (501, 217)
@@ -120,23 +111,13 @@ Yellow7 = (511, 222)
 Black1 = (492, 202)
 
 #Corner pocket radius, coords
-POCKET_RADIUS = 15
-pocket_coords = [
-    (150, 93), 
-    (560, 93), 
-    (150, 312), 
-    (560, 312), 
-    (560, 85), 
-    (560, 320)
-]
+CP_RADIUS = 17
 CP_TL = (150, 93)
 CP_TR = (560, 93)
 CP_BL = (150, 312)
 CP_BR = (560, 312)
 
 #Middle pocket radius, coords
+MP_RADIUS = 13.5
 MP_T = (560, 85)
 MP_B = (560, 320)
-
-#List for potted balls
-Balls_Potted = []
