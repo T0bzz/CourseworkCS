@@ -1,5 +1,5 @@
 import pygame
-from math import sin, cos, tanh
+from math import sin, cos, tan
 
 
 class Inputbox:
@@ -7,6 +7,7 @@ class Inputbox:
         self.eq = eq
         self.x = x
         self.y = y
+        self.play = False
 
     def input_handler(self, event):
         if event.type == pygame.TEXTINPUT:
@@ -16,5 +17,8 @@ class Inputbox:
             if event.key == pygame.K_BACKSPACE:
                 if len(self.eq) >= 5:
                     self.eq = self.eq[:-1]
+            if event.key == pygame.K_RETURN:
+                self.play = True
+        
 
 

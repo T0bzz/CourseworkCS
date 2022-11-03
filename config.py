@@ -29,7 +29,7 @@ SF = WIDTH / DS_WIDTH
 FPS = 120
 
 # debug
-debug = False
+debug = True
 
 # files
 GAME_FOLDER = path.dirname(__file__)
@@ -54,13 +54,13 @@ balls_potted = []
 balls_notpotted = 15
 
 
-#  Values needed for the pool table
+#Values needed for the pool table
 RECT_HEIGHT = 600
 CUSHIONS = 30
 MARGIN = 30
 
 #Cueball
-CUEBALL_RADIUS = 5
+BALL_RADIUS = 5
 
 #Variables for input box
 COLOUR_OFF = WHITE
@@ -71,17 +71,17 @@ INPUT_FONT = SysFont(None, 32)
 #Cushions coords
 
 #Left side
-CUSHION1 = (151, 110), (151, 295)
+CUSHION1 = (153, 110), (153, 295)
 #Top left
-CUSHION2 = (167, 103), (350, 103)
+CUSHION2 = (167, 101), (350, 101)
 #Top Right
-CUSHION3 = (369, 103), (552, 103)
+CUSHION3 = (369, 101), (552, 101)
 #Right side
-CUSHION4 = (559, 110), (559, 295)
+CUSHION4 = (557, 110), (557, 295)
 #Bottom right
-CUSHION5 = (369, 302), (552, 302)
+CUSHION5 = (369, 299), (552, 299)
 #Bottom left
-CUSHION6 = (167, 302), (350, 302)
+CUSHION6 = (167, 299), (350, 299)
 
 #Backdround box for table friction
 BOX_COORDS = (0, 0), (650, 370)
@@ -111,13 +111,18 @@ Yellow7 = (511, 222)
 Black1 = (492, 202)
 
 #Corner pocket radius, coords
-CP_RADIUS = 17
+POCKET_RADIUS = 13
+pocket_coords = [ 
+    (150, 93), #Top left
+    (560, 93), #Top right
+    (150, 312), #Bottom left
+    (560, 312), #Bottom right
+    (359, 85), #Top middle
+    (359, 321) #Bottom middle
+]
 CP_TL = (150, 93)
 CP_TR = (560, 93)
 CP_BL = (150, 312)
 CP_BR = (560, 312)
-
-#Middle pocket radius, coords
-MP_RADIUS = 13.5
-MP_T = (560, 85)
-MP_B = (560, 320)
+MP_T = (359, 93)
+MP_B = (359, 312)
