@@ -39,6 +39,7 @@ TABLE_FOLDER = path.join(ASSETS_FOLDER, "table")
 POCKET_FOLDER = path.join(ASSETS_FOLDER, "pocket")
 CUEBALL_FOLDER = path.join(ASSETS_FOLDER, "cueball")
 BALL_FOLDER = path.join(ASSETS_FOLDER, "balls")
+CUESTICK_FOLDER = path.join(ASSETS_FOLDER, "cuestick")
 
 BUTTONS = {}
 TABLE_IMAGE = {}

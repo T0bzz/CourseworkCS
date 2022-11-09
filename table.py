@@ -6,7 +6,7 @@ from pocket import Pocket
 from cushion import Cushion
 from ball import Cueball, Red_Ball, Yellow_Ball, Black_Ball
 from ball import Cueball
-from inputbox import Inputbox
+#from inputbox import Inputbox
 
 
 
@@ -27,6 +27,7 @@ class Table:
         self.yellowball = [Yellow_Ball(Yellow1, 5, self.static_body), Yellow_Ball(Yellow2, 5, self.static_body), Yellow_Ball(Yellow3, 5, self.static_body), Yellow_Ball(Yellow4, 5, self.static_body), Yellow_Ball(Yellow5, 5, self.static_body), Yellow_Ball(Yellow6, 5, self.static_body), Yellow_Ball(Yellow7, 5, self.static_body)]
         self.blackball = Black_Ball(Black1, 1, self.static_body)
         self.pockets = [Pocket(CP_TL), Pocket(CP_TR), Pocket(CP_BL), Pocket(CP_BR), Pocket(MP_T), Pocket(MP_B)]
+        self.cuestick = pygame.image.load(path.join(CUESTICK_FOLDER, "cue.png")).convert_alpha()
 
         self.space.add(self.cueball.body, self.cueball.shape, self.cueball.pivot)
         self.space.add(self.blackball.body, self.blackball.shape, self.blackball.pivot)
@@ -40,16 +41,16 @@ class Table:
             self.space.add(pockets.body, pockets.shape)
         
 
-        self.input_box = Inputbox()
+        #self.input_box = Inputbox()
 
 
     def input_handler(self, event):
-        self.input_box.input_handler(event)
+    #    self.input_box.input_handler(event)
+        pass
 
 
 
     def draw(self):
-        pygame.draw.line(self.display_surface, WHITE, (0, 0), (50, 720), width=5)
         self.display_surface.blit(self.image, (self.x, self.y))
         self.display_surface.blit(
             self.cueball.image, ((self.cueball.body.position.x), (self.cueball.body.position.y)))
@@ -59,9 +60,10 @@ class Table:
             self.display_surface.blit(redball.image, ((redball.body.position.x), (redball.body.position.y)))
         for yellowball in self.yellowball:
             self.display_surface.blit(yellowball.image, ((yellowball.body.position.x), (yellowball.body.position.y)))
-        text = INPUT_FONT.render(
-            self.input_box.eq, True, pygame.Color("turquoise"))
-        self.display_surface.blit(text, text.get_rect())
+        #text = INPUT_FONT.render(
+        #    self.input_box.eq, True, pygame.Color("turquoise"))
+        #self.display_surface.blit(text, text.get_rect())
+        #self.display_surface.blit(self.cuestick, (483, 207))
 
     def pocket(self):
         #Red and yellow balls
@@ -95,11 +97,12 @@ class Table:
     def update(self):
         self.pocket()
         print("Cueball:", self.cueball.body.velocity)
+        print("Cueball position y:", self.cueball.body.position.y)
         self.space.step(1/120)
-        if self.input_box.play and self.cueball.body.velocity == (0, 0):
-            self.cueball.move((self.cueball.body.position), self.input_box.eq)
-        else:
-            pass
-        if self.input_box.play:
-            self.input_box.play = False
+        # if self.input_box.play and self.cueball.body.velocity == (0, 0):
+        #     self.cueball.move((self.cueball.body.position), self.input_box.eq)
+        # else:
+        #     pass
+        # if self.input_box.play:
+        #     self.input_box.play = False
 

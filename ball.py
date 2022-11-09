@@ -19,19 +19,19 @@ class Cueball:
         self.pivot.max_force = 1200
         
                 
-    def move(self, temp_pos, eq):
-        self.body.apply_impulse_at_local_point((100, 0))
-        temp_pos = (self.body.position.x, self.body.position.y)
-        x = self.body.position.x
-        y = eval(eq[3:]) # Skips 'y ='
-        self.body.position = x, y-52
-        try:
-            print("Test1")
-            print("Test2")
-            if type(self.y) not in (int, float):
-                raise Exception("Unexpected eval() return")
-        except:
-            x, y = temp_pos  # Dont move if equation is invalid
+    # def move(self, temp_pos, eq):
+    #     self.body.apply_impulse_at_local_point((100, 0))
+    #     temp_pos = (self.body.position.x, self.body.position.y)
+    #     x = self.body.position.x
+    #     try:
+    #         y = eval(eq[3:]) # Skips 'y ='
+    #         self.body.position = x, y
+    #         print("Test1")
+    #         print("Test2")
+    #         if type(self.y) not in (int, float):
+    #             raise Exception("Unexpected eval() return")
+    #     except:
+    #         x, y = temp_pos  # Dont move if equation is invalid
             
 
 class Red_Ball(Cueball):
