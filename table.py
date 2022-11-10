@@ -1,6 +1,7 @@
 import pygame
 import pymunk
-import math
+import math#
+from math import cos, sin, tan, radians
 from config import *
 from pocket import Pocket
 from cushion import Cushion
@@ -14,6 +15,7 @@ class Table:
     def __init__(self, engine, display_surface, x, y):
         self.x = x
         self.y = y
+        self.mousepos = pygame.mouse.get_pos()
         self.cushions = [Cushion(CUSHION1), Cushion(CUSHION2), Cushion(
             CUSHION3), Cushion(CUSHION4), Cushion(CUSHION5), Cushion(CUSHION6)]
         self.space = pymunk.Space()
@@ -23,6 +25,7 @@ class Table:
         self.image = pygame.image.load(
             path.join(TABLE_FOLDER, "Table.png")).convert_alpha()
         self.cueball = Cueball(260 - BALL_RADIUS * 2, 209 - BALL_RADIUS * 2, 5, self.static_body)
+        self.angle = self.rotate()
         self.redball = [Red_Ball(RED1, 5, self.static_body), Red_Ball(RED2, 5, self.static_body), Red_Ball(RED3, 5, self.static_body), Red_Ball(RED4, 5, self.static_body), Red_Ball(RED5, 5, self.static_body), Red_Ball(RED6, 5, self.static_body), Red_Ball(RED7, 5, self.static_body)]
         self.yellowball = [Yellow_Ball(Yellow1, 5, self.static_body), Yellow_Ball(Yellow2, 5, self.static_body), Yellow_Ball(Yellow3, 5, self.static_body), Yellow_Ball(Yellow4, 5, self.static_body), Yellow_Ball(Yellow5, 5, self.static_body), Yellow_Ball(Yellow6, 5, self.static_body), Yellow_Ball(Yellow7, 5, self.static_body)]
         self.blackball = Black_Ball(Black1, 1, self.static_body)
@@ -44,9 +47,7 @@ class Table:
         #self.input_box = Inputbox()
 
 
-    def input_handler(self, event):
-    #    self.input_box.input_handler(event)
-        pass
+    
 
 
 
@@ -94,8 +95,25 @@ class Table:
                 self.display_surface.blit(self.cueball.image, (260 - BALL_RADIUS * 2, 209 - BALL_RADIUS * 2))
                 self.cueball.body.velocity = (0, 0)
 
+    def rotate(self):
+        ball_pos = self.cueball.body.position.x, self.cueball.body.position.y
+        x_dist = ball_pos[0] - self.mousepos[0]
+        y_dist = -(ball_pos[1] - self.mousepos[1])
+        angle = math.degrees(math.atan2(x_dist, y_dist))
+        return angle
+
+    def input_handler(self, event):
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                impulse_x = cos(radians(self.angle))
+                impulse_y = sin(radians(self.angle))
+                self.cueball.body.apply_impulse_at_local_point(100*impulse_x, 100*impulse_y)
+
+
+
     def update(self):
         self.pocket()
+        self.input_handler()
         print("Cueball:", self.cueball.body.velocity)
         print("Cueball position y:", self.cueball.body.position.y)
         self.space.step(1/120)

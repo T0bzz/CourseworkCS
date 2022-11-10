@@ -18,6 +18,7 @@ class Cueball:
         self.pivot.max_bias = 0
         self.pivot.max_force = 1200
         
+        
                 
     # def move(self, temp_pos, eq):
     #     self.body.apply_impulse_at_local_point((100, 0))
