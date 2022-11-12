@@ -127,3 +127,9 @@ CP_BL = (150, 312)
 CP_BR = (560, 312)
 MP_T = (359, 93)
 MP_B = (359, 312)
+
+
+#Cue variables
+FORCE = 100
+MAX_FORCE = 19000
+DIRECTION = 1

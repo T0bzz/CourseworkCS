@@ -1,7 +1,7 @@
 import pygame
 from config import *
 import pymunk
-from math import sin, cos, tan
+from math import sin, cos, tan, degrees, radians
 
 
 class Cueball:
@@ -20,19 +20,16 @@ class Cueball:
         
         
                 
-    # def move(self, temp_pos, eq):
-    #     self.body.apply_impulse_at_local_point((100, 0))
-    #     temp_pos = (self.body.position.x, self.body.position.y)
-    #     x = self.body.position.x
-    #     try:
-    #         y = eval(eq[3:]) # Skips 'y ='
-    #         self.body.position = x, y
-    #         print("Test1")
-    #         print("Test2")
-    #         if type(self.y) not in (int, float):
-    #             raise Exception("Unexpected eval() return")
-    #     except:
-    #         x, y = temp_pos  # Dont move if equation is invalid
+    def move(self, pos, angle):
+        try:
+            self.angle = float(angle[7:])
+            self.force = 8000
+            self.x_impulse = cos(radians(self.angle))
+            self.y_impulse = sin(radians(self.angle))
+            self.body.apply_impulse_at_local_point((-(self.force*self.x_impulse), -(self.force*self.y_impulse)))
+        except ValueError:
+            pass
+        
             
 
 class Red_Ball(Cueball):
@@ -46,7 +43,7 @@ class Red_Ball(Cueball):
         self.body.position = (position)
         self.pivot = pymunk.PivotJoint(static_body, self.body, (0, 0), (0, 0))
         self.pivot.max_bias = 0
-        self.pivot.max_force = 1000
+        self.pivot.max_force = 1200
             
     def move():
         pass
@@ -64,7 +61,7 @@ class Yellow_Ball(Cueball):
         self.body.position = (position)
         self.pivot = pymunk.PivotJoint(static_body, self.body, (0, 0), (0, 0))
         self.pivot.max_bias = 0
-        self.pivot.max_force = 1000
+        self.pivot.max_force = 1200
             
     def move():
         pass
@@ -80,7 +77,7 @@ class Black_Ball(Cueball):
         self.body.position = (position)
         self.pivot = pymunk.PivotJoint(static_body, self.body, (0, 0), (0, 0))
         self.pivot.max_bias = 0
-        self.pivot.max_force = 1000
+        self.pivot.max_force = 1200
             
     def move():
         pass

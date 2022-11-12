@@ -2,23 +2,25 @@ import pygame
 from math import sin, cos, tan
 
 
-class Inputbox:
-    def __init__(self, eq="y = x", x=0, y=0):
-        self.eq = eq
-        self.x = x
-        self.y = y
+class Inputbox():
+    def __init__(self):
+        self.angle_input = "Angle: 180"
         self.play = False
 
+    def update(self):
+        self.play = play
+
     def input_handler(self, event):
+        self.play = False
         if event.type == pygame.TEXTINPUT:
-            if event.text in "0123456789 +-/*x().sintaco":
-                self.eq += event.text
-        if event.type == pygame.KEYUP:
+            if event.type == pygame.TEXTINPUT:
+                if event.text in "0123456789.-":
+                    self.angle_input += event.text
+        elif event.type == pygame.KEYUP:
             if event.key == pygame.K_BACKSPACE:
-                if len(self.eq) >= 5:
-                    self.eq = self.eq[:-1]
-            if event.key == pygame.K_RETURN:
+                self.angle_input = self.angle_input[:-1]
+            elif event.key == pygame.K_RETURN:
                 self.play = True
-        
+                
 
 
