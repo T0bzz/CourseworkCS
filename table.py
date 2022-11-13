@@ -67,7 +67,7 @@ class Table:
         text = INPUT_FONT.render(
            self.input_box.angle_input, True, pygame.Color("turquoise"))
         self.display_surface.blit(text, text.get_rect())
-        self.display_surface.blit(self.cue_image_scaled, (100, 100))
+        self.display_surface.blit(self.cue_image_scaled, (self.cueball.body.position.x-200, self.cueball.body.position.y-5))
 
     def pocket(self):
         #Red and yellow balls
@@ -79,9 +79,9 @@ class Table:
                 red_y_dist = abs((ball.body.position.y) - (pocket[1]))
                 red_dist = math.sqrt((red_x_dist**2) + (red_y_dist**2))
                 if red_dist < POCKET_RADIUS:
+                    self.display_surface.blit(ball.image, (0, 0))
                     self.space.remove(ball.body, ball.shape)
                     self.redball.remove(ball)
-                    self.display_surface.blit(ball.image, (0, 0))
         for pocket in pocket_coords:
             for ball in self.yellowball:
                 yellow_x_dist = abs((ball.body.position.x) - (pocket[0]))
@@ -89,6 +89,7 @@ class Table:
                 yellow_dist = math.sqrt((yellow_x_dist**2) + (yellow_y_dist**2))
                 if yellow_dist < POCKET_RADIUS:
                     self.space.remove(ball.body, ball.shape)
+                    self.yellowball.remove(ball)
                     self.display_surface.blit(ball.image, (0, 0))
         for pocket in pocket_coords:
             cue_x_dist = abs((self.cueball.body.position.x) - (pocket[0]))
@@ -102,19 +103,19 @@ class Table:
 
     def ball_velocity(self):
         stopped = False
-        for redballs in self.redball:
-            for yellowballs in self.yellowball:
-                if self.cueball.body.velocity == (0, 0) and self.blackball.body.velocity == (0, 0) and redballs.body.velocity == (0, 0) and yellowballs.body.velocity == (0, 0):
-                    stopped = True
+        if self.cueball.body.velocity == (0, 0) and self.blackball.body.velocity == (0, 0) and self.redball[0].body.velocity == (0, 0) and self.redball[1].body.velocity == (0, 0) and self.redball[2].body.velocity == (0, 0) and self.redball[3].body.velocity == (0, 0) and self.redball[4].body.velocity == (0, 0) and self.redball[5].body.velocity == (0, 0) and self.redball[6].body.velocity == (0, 0) and self.yellowball[0].body.velocity == (0, 0) and self.yellowball[1].body.velocity == (0, 0) and self.yellowball[2].body.velocity == (0, 0) and self.yellowball[3].body.velocity == (0, 0) and self.yellowball[4].body.velocity == (0, 0) and self.yellowball[5].body.velocity == (0, 0) and self.yellowball[6].body.velocity == (0, 0):
+            stopped = True
         return stopped
         
 
 
     def update(self):
+        print("----------------------------------------------------------------------------------------------------")
         self.pocket()
+        print("Redball:", self.redball[1].body.velocity)
         print("Cueball:", self.cueball.body.velocity)
         print("Cueball position y:", self.cueball.body.position.y)
-        self.space.step(1/300)
+        self.space.step(1/480)
         if self.input_box.play and self.ball_velocity() == True:
             print("Hello")
             self.cueball.move((self.cueball.body.position), self.input_box.angle_input)
