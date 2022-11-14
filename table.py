@@ -79,25 +79,27 @@ class Table:
                 red_y_dist = abs((ball.body.position.y) - (pocket[1]))
                 red_dist = math.sqrt((red_x_dist**2) + (red_y_dist**2))
                 if red_dist < POCKET_RADIUS:
-                    self.display_surface.blit(ball.image, (0, 0))
-                    self.space.remove(ball.body, ball.shape)
-                    self.redball.remove(ball)
+                    for ball_pos in REDS:
+                        ball.body.position = (ball_pos)
+                        ball.body.velocity = (0, 0)
+                        ball_pos += 1
         for pocket in pocket_coords:
             for ball in self.yellowball:
                 yellow_x_dist = abs((ball.body.position.x) - (pocket[0]))
                 yellow_y_dist = abs((ball.body.position.y) - (pocket[1]))
                 yellow_dist = math.sqrt((yellow_x_dist**2) + (yellow_y_dist**2))
                 if yellow_dist < POCKET_RADIUS:
-                    self.space.remove(ball.body, ball.shape)
-                    self.yellowball.remove(ball)
-                    self.display_surface.blit(ball.image, (0, 0))
+                    for ball_pos in YELLOWS:
+                        ball.body.position = (ball_pos)
+                        ball.body.velocity = (0, 0)
+                        ball_pos += 1
         for pocket in pocket_coords:
             cue_x_dist = abs((self.cueball.body.position.x) - (pocket[0]))
             cue_y_dist = abs((self.cueball.body.position.y) - (pocket[1]))
             cue_dist = math.sqrt((cue_x_dist**2) + (cue_y_dist**2))
             if cue_dist < POCKET_RADIUS:
                 print("self.cueball.image")
-                self.display_surface.blit(self.cueball.image, (260 - BALL_RADIUS * 2, 209 - BALL_RADIUS * 2))
+                self.cueball.body.position = (260 - BALL_RADIUS * 2, 209 - BALL_RADIUS * 2)
                 self.cueball.body.velocity = (0, 0)
 
 
