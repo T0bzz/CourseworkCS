@@ -68,7 +68,10 @@ class Table:
            self.input_box.angle_input, True, pygame.Color("turquoise"))
         self.display_surface.blit(text, text.get_rect())
         self.display_surface.blit(self.cue_image_scaled, (self.cueball.body.position.x-200, self.cueball.body.position.y-5))
+        self.draw_line()
 
+
+   
     def pocket(self):
         #Red and yellow balls
         for pocket in pocket_coords:
@@ -82,7 +85,6 @@ class Table:
                     for ball_pos in REDS:
                         ball.body.position = (ball_pos)
                         ball.body.velocity = (0, 0)
-                        ball_pos += 1
         for pocket in pocket_coords:
             for ball in self.yellowball:
                 yellow_x_dist = abs((ball.body.position.x) - (pocket[0]))
@@ -108,8 +110,18 @@ class Table:
         if self.cueball.body.velocity == (0, 0) and self.blackball.body.velocity == (0, 0) and self.redball[0].body.velocity == (0, 0) and self.redball[1].body.velocity == (0, 0) and self.redball[2].body.velocity == (0, 0) and self.redball[3].body.velocity == (0, 0) and self.redball[4].body.velocity == (0, 0) and self.redball[5].body.velocity == (0, 0) and self.redball[6].body.velocity == (0, 0) and self.yellowball[0].body.velocity == (0, 0) and self.yellowball[1].body.velocity == (0, 0) and self.yellowball[2].body.velocity == (0, 0) and self.yellowball[3].body.velocity == (0, 0) and self.yellowball[4].body.velocity == (0, 0) and self.yellowball[5].body.velocity == (0, 0) and self.yellowball[6].body.velocity == (0, 0):
             stopped = True
         return stopped
-        
 
+    
+    def draw_line(self):
+        try:
+            angle = float(self.input_box.angle_input[7:])
+            x_pos = cos(radians(angle))
+            y_pos = sin(radians(angle)) 
+            print("x position", x_pos)
+            print("y position", y_pos)
+            pygame.draw.line(self.display_surface, YELLOW, (self.cueball.body.position.x+5, self.cueball.body.position.y+5), ((280+56)*x_pos, 208*y_pos), 1)
+        except ValueError:
+            pass
 
     def update(self):
         print("----------------------------------------------------------------------------------------------------")
@@ -118,6 +130,7 @@ class Table:
         print("Cueball:", self.cueball.body.velocity)
         print("Cueball position y:", self.cueball.body.position.y)
         self.space.step(1/480)
+        self.draw_line()
         if self.input_box.play and self.ball_velocity() == True:
             print("Hello")
             self.cueball.move((self.cueball.body.position), self.input_box.angle_input)

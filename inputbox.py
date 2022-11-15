@@ -7,9 +7,6 @@ class Inputbox():
         self.angle_input = "Angle: 180"
         self.play = False
 
-    def update(self):
-        self.play = play
-
     def input_handler(self, event):
         self.play = False
         if event.type == pygame.TEXTINPUT:
