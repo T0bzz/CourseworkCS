@@ -94,7 +94,6 @@ class Table:
                     for ball_pos in YELLOWS:
                         ball.body.position = (ball_pos)
                         ball.body.velocity = (0, 0)
-                        ball_pos += 1
         for pocket in pocket_coords:
             cue_x_dist = abs((self.cueball.body.position.x) - (pocket[0]))
             cue_y_dist = abs((self.cueball.body.position.y) - (pocket[1]))
@@ -114,12 +113,16 @@ class Table:
     
     def draw_line(self):
         try:
-            angle = float(self.input_box.angle_input[7:])
+            angle = float(self.input_box.angle_input[7:11])
+            #print("Angle:------------------------------------------------------------------------------", angle)
             x_pos = cos(radians(angle))
-            y_pos = sin(radians(angle)) 
-            print("x position", x_pos)
-            print("y position", y_pos)
-            pygame.draw.line(self.display_surface, YELLOW, (self.cueball.body.position.x+5, self.cueball.body.position.y+5), ((280+56)*x_pos, 208*y_pos), 1)
+            y_pos = sin(radians(angle))
+            print("Y_POSITION -------------------------------------------------------------------------------------------------------", y_pos)
+            #print("x position", x_pos)
+            # print("y position", y_pos)
+            # print("INAVLID END POINT", (self.cueball.body.position.x + 25) * x_pos)
+            if self.ball_velocity():
+                pygame.draw.line(self.display_surface, YELLOW, (self.cueball.body.position.x+5, self.cueball.body.position.y+5), (-(8000 * x_pos)*20, -(8000*y_pos)*20), 1)
         except ValueError:
             pass
 

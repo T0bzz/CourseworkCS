@@ -22,10 +22,11 @@ class Cueball:
                 
     def move(self, pos, angle):
         try:
-            self.angle = float(angle[7:])
+            self.angle = float(angle[7:11])
             self.force = 8000
             self.x_impulse = cos(radians(self.angle))
             self.y_impulse = sin(radians(self.angle))
+            print("Y impulse ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------", self.y_impulse)
             self.body.apply_impulse_at_local_point((-(self.force*self.x_impulse), -(self.force*self.y_impulse)))
         except ValueError:
             pass

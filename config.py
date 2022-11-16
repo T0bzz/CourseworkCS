@@ -44,10 +44,6 @@ CUESTICK_FOLDER = path.join(ASSETS_FOLDER, "cuestick")
 BUTTONS = {}
 TABLE_IMAGE = {}
 
-# Values for balls (number, radius, friction and font)
-# Need each colour twice for strips and solids (Excep black)
-COLOUR = [YELLOW, BLUE, RED, PURPLE, ORANGE, GREEN, BROWN,
-          BLACK, WHITE, YELLOW, BLUE, RED, PURPLE, ORANGE, GREEN, BROWN]
 RADIUS = 5
 FRICTION = 0
 BALL_FONT = ("Agency FB", 10)
@@ -91,25 +87,25 @@ BOX_COORDS = (0, 0), (650, 370)
 SLOW_BALL = pygame.time.get_ticks() + 1 * 1000
 
 #Red ball coords
-RED1 = (483, 207)
-RED2 = (492, 193)
-RED3 = (501, 217)
-RED4 = (501, 197)
-RED5 = (511, 183)
-RED6 = (511, 202)
-RED7 = (511, 212)
+RED1 = (483, 204)
+RED2 = (492, 190)
+RED3 = (501, 214)
+RED4 = (501, 194)
+RED5 = (511, 180)
+RED6 = (511, 199)
+RED7 = (511, 209)
 
 #Yellow ball coords
-Yellow1 = (474, 202)
-Yellow2 = (483, 197)
-Yellow3 = (492, 212)
-Yellow4 = (502, 207)
-Yellow5 = (504, 187)
-Yellow6 = (511, 193)
-Yellow7 = (511, 222)
+Yellow1 = (474, 199)
+Yellow2 = (483, 194)
+Yellow3 = (492, 209)
+Yellow4 = (502, 204)
+Yellow5 = (504, 184)
+Yellow6 = (511, 190)
+Yellow7 = (511, 219)
 
 #Black ball Coord
-Black1 = (492, 202)
+Black1 = (492, 199)
 
 #Corner pocket radius, coords
 POCKET_RADIUS = 14.5
