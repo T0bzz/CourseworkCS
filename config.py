@@ -40,6 +40,8 @@ POCKET_FOLDER = path.join(ASSETS_FOLDER, "pocket")
 CUEBALL_FOLDER = path.join(ASSETS_FOLDER, "cueball")
 BALL_FOLDER = path.join(ASSETS_FOLDER, "balls")
 CUESTICK_FOLDER = path.join(ASSETS_FOLDER, "cuestick")
+CUE_IMAGE_ = pygame.image.load(path.join(CUESTICK_FOLDER, "cue.png"))
+#CUE_IMAGE_SCALED = pygame.transform.rotozoom(CUE_IMAGE_ORIGINAL, 0, 0.09)
 
 BUTTONS = {}
 TABLE_IMAGE = {}
@@ -135,3 +137,16 @@ DIRECTION = 1
 #Balls postted coordinates
 REDS = [(187, 342), (202, 342), (218, 342), (235, 342), (251, 342), (267, 342), (280, 342)]
 YELLOWS = [(187, 362), (202, 362), (218, 362), (235, 362), (251, 362), (267, 362), (280, 362)]
+
+
+
+
+
+#Coords needed for the level
+
+L_RED1 = (547, 113)
+L_RED2 = (547, 291)
+L_RED3 = (359, 113)
+L_RED4 = (359, 291)
+L_RED5 = (174, 113)
+L_RED6 = (174, 291)

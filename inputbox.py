@@ -12,10 +12,12 @@ class Inputbox():
         if event.type == pygame.TEXTINPUT:
             if event.type == pygame.TEXTINPUT:
                 if event.text in "0123456789.-":
-                    self.angle_input += event.text
+                    if len(self.angle_input) <= 12:
+                        self.angle_input += event.text
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_BACKSPACE:
-                self.angle_input = self.angle_input[:-1]
+                if len(self.angle_input) >= 8:
+                    self.angle_input = self.angle_input[:-1]
             elif event.key == pygame.K_RETURN:
                 self.play = True
                 

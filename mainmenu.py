@@ -6,6 +6,7 @@ from config import *
 from button import Button
 from freeplay import Freeplay
 from mode import Mode
+from level import Level
 
 
 class MainMenu:
@@ -24,7 +25,7 @@ class MainMenu:
         self.buttons.append(Button(760, 250, BUTTONS["Title"]))
         self.buttons.append(
             Button(885, 400, BUTTONS["Freeplay"], self.start_freeplay))
-        self.buttons.append(Button(885, 550, BUTTONS["Levels"]))
+        self.buttons.append(Button(885, 550, BUTTONS["Levels"], self.start_level))
         self.buttons.append(Button(885, 700, BUTTONS["Settings"]))
 
     def input_handler(self, event):
@@ -49,3 +50,6 @@ class MainMenu:
     def start_freeplay(self):
         self.game.current_mode = Freeplay(
             self.game, self.engine, -1, self.screen, self.display_surface)
+
+    def start_level(self):
+        self.game.current_mode = Level(self.game, self.engine, 1, self.screen, self.display_surface)

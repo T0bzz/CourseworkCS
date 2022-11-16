@@ -12,9 +12,10 @@ from inputbox import Inputbox
 
 
 class Table:
-    def __init__(self, engine, display_surface, x, y):
+    def __init__(self, engine, display_surface, x, y, mode):
         self.x = x
         self.y = y
+        self.mode = mode
         self.force = FORCE 
         self.max_force = MAX_FORCE
         self.direction = DIRECTION
@@ -27,12 +28,13 @@ class Table:
         self.image = pygame.image.load(
             path.join(TABLE_FOLDER, "Table.png")).convert_alpha()
         self.cueball = Cueball(260 - BALL_RADIUS * 2, 209 - BALL_RADIUS * 2, 5, self.static_body)
-        self.redball = [Red_Ball(RED1, 5, self.static_body), Red_Ball(RED2, 5, self.static_body), Red_Ball(RED3, 5, self.static_body), Red_Ball(RED4, 5, self.static_body), Red_Ball(RED5, 5, self.static_body), Red_Ball(RED6, 5, self.static_body), Red_Ball(RED7, 5, self.static_body)]
+        if self.mode == -1:
+            self.redball = [Red_Ball(RED1, 5, self.static_body), Red_Ball(RED2, 5, self.static_body), Red_Ball(RED3, 5, self.static_body), Red_Ball(RED4, 5, self.static_body), Red_Ball(RED5, 5, self.static_body), Red_Ball(RED6, 5, self.static_body), Red_Ball(RED7, 5, self.static_body)]
+        elif self.mode == 1:
+            self.redball = [Red_Ball(L_RED1, 5, self.static_body), Red_Ball(L_RED2, 5, self.static_body), Red_Ball(L_RED3, 5, self.static_body), Red_Ball(L_RED4, 5, self.static_body), Red_Ball(L_RED5, 5, self.static_body), Red_Ball(L_RED6, 5, self.static_body)]
         self.yellowball = [Yellow_Ball(Yellow1, 5, self.static_body), Yellow_Ball(Yellow2, 5, self.static_body), Yellow_Ball(Yellow3, 5, self.static_body), Yellow_Ball(Yellow4, 5, self.static_body), Yellow_Ball(Yellow5, 5, self.static_body), Yellow_Ball(Yellow6, 5, self.static_body), Yellow_Ball(Yellow7, 5, self.static_body)]
         self.blackball = Black_Ball(Black1, 1, self.static_body)
         self.pockets = [Pocket(CP_TL), Pocket(CP_TR), Pocket(CP_BL), Pocket(CP_BR), Pocket(MP_T), Pocket(MP_B)]
-        self.cue_image_original = pygame.image.load(path.join(CUESTICK_FOLDER, "cue.png"))
-        self.cue_image_scaled = pygame.transform.rotozoom(self.cue_image_original, 0, 0.09)
 
         self.space.add(self.cueball.body, self.cueball.shape, self.cueball.pivot)
         self.space.add(self.blackball.body, self.blackball.shape, self.blackball.pivot)
@@ -53,22 +55,31 @@ class Table:
         self.input_box.input_handler(event)
 
 
-
     def draw(self):
-        self.display_surface.blit(self.image, (self.x, self.y))
-        self.display_surface.blit(
-            self.cueball.image, ((self.cueball.body.position.x), (self.cueball.body.position.y)))
-        self.display_surface.blit(
-            self.blackball.image, ((self.blackball.body.position.x), (self.blackball.body.position.y)))
-        for redball in self.redball:
-            self.display_surface.blit(redball.image, ((redball.body.position.x), (redball.body.position.y)))
-        for yellowball in self.yellowball:
-            self.display_surface.blit(yellowball.image, ((yellowball.body.position.x), (yellowball.body.position.y)))
-        text = INPUT_FONT.render(
-           self.input_box.angle_input, True, pygame.Color("turquoise"))
-        self.display_surface.blit(text, text.get_rect())
-        self.display_surface.blit(self.cue_image_scaled, (self.cueball.body.position.x-200, self.cueball.body.position.y-5))
-        self.draw_line()
+        if self.mode == -1:
+            self.display_surface.blit(self.image, (self.x, self.y))
+            self.display_surface.blit(
+                self.cueball.image, ((self.cueball.body.position.x), (self.cueball.body.position.y)))
+            self.display_surface.blit(
+                self.blackball.image, ((self.blackball.body.position.x), (self.blackball.body.position.y)))
+            for redball in self.redball:
+                self.display_surface.blit(redball.image, ((redball.body.position.x), (redball.body.position.y)))
+            for yellowball in self.yellowball:
+                self.display_surface.blit(yellowball.image, ((yellowball.body.position.x), (yellowball.body.position.y)))
+            text = INPUT_FONT.render(
+               self.input_box.angle_input, True, pygame.Color("turquoise"))
+            self.display_surface.blit(text, text.get_rect())
+            self.draw_line()
+        elif self.mode == 1:
+            self.display_surface.blit(self.image, (self.x, self.y))
+            self.display_surface.blit(
+                self.cueball.image, ((self.cueball.body.position.x), (self.cueball.body.position.y)))
+            for redball in self.redball:
+                self.display_surface.blit(redball.image, ((redball.body.position.x), (redball.body.position.y)))
+            text = INPUT_FONT.render(
+               self.input_box.angle_input, True, pygame.Color("turquoise"))
+            self.display_surface.blit(text, text.get_rect())
+            self.draw_line()
 
 
    
@@ -106,8 +117,12 @@ class Table:
 
     def ball_velocity(self):
         stopped = False
-        if self.cueball.body.velocity == (0, 0) and self.blackball.body.velocity == (0, 0) and self.redball[0].body.velocity == (0, 0) and self.redball[1].body.velocity == (0, 0) and self.redball[2].body.velocity == (0, 0) and self.redball[3].body.velocity == (0, 0) and self.redball[4].body.velocity == (0, 0) and self.redball[5].body.velocity == (0, 0) and self.redball[6].body.velocity == (0, 0) and self.yellowball[0].body.velocity == (0, 0) and self.yellowball[1].body.velocity == (0, 0) and self.yellowball[2].body.velocity == (0, 0) and self.yellowball[3].body.velocity == (0, 0) and self.yellowball[4].body.velocity == (0, 0) and self.yellowball[5].body.velocity == (0, 0) and self.yellowball[6].body.velocity == (0, 0):
-            stopped = True
+        if self.mode == -1:
+            if self.cueball.body.velocity == (0, 0) and self.blackball.body.velocity == (0, 0) and self.redball[0].body.velocity == (0, 0) and self.redball[1].body.velocity == (0, 0) and self.redball[2].body.velocity == (0, 0) and self.redball[3].body.velocity == (0, 0) and self.redball[4].body.velocity == (0, 0) and self.redball[5].body.velocity == (0, 0) and self.redball[6].body.velocity == (0, 0) and self.yellowball[0].body.velocity == (0, 0) and self.yellowball[1].body.velocity == (0, 0) and self.yellowball[2].body.velocity == (0, 0) and self.yellowball[3].body.velocity == (0, 0) and self.yellowball[4].body.velocity == (0, 0) and self.yellowball[5].body.velocity == (0, 0) and self.yellowball[6].body.velocity == (0, 0):
+                stopped = True
+        elif self.mode == 1:
+            if self.cueball.body.velocity == (0, 0) and self.redball[0].body.velocity == (0, 0) and self.redball[1].body.velocity == (0, 0) and self.redball[2].body.velocity == (0, 0) and self.redball[3].body.velocity == (0, 0) and self.redball[4].body.velocity == (0, 0) and self.redball[5].body.velocity == (0, 0):
+                stopped = True
         return stopped
 
     

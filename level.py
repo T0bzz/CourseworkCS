@@ -1,13 +1,10 @@
 import pygame
-from mode import Mode
-from config import *
-from math import cos, radians
 from table import Table
-from pocket import Pocket
-from ball import Cueball
+from config import *
+from table import Table
 
 
-class Freeplay:
+class Level:
     def __init__(self, game, engine, mode, screen, display_surface):
         self.game = game
         self.engine = engine
