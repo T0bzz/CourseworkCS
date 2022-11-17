@@ -17,13 +17,15 @@ class Table:
         self.y = y
         self.red_increment = 0
         self.yellow_increment = 0
+        self.red_balls_potted = 0
+        self.yellow_balls_potted = 0
         self.mode = mode
         self.coords_potted = [0, 30, 60, 90, 120, 150, 180]
         self.force = FORCE 
         self.max_force = MAX_FORCE
         self.direction = DIRECTION
         self.cushions = [Cushion(CUSHION1), Cushion(CUSHION2), Cushion(
-            CUSHION3), Cushion(CUSHION4), Cushion(CUSHION5), Cushion(CUSHION6)]
+            CUSHION3), Cushion(CUSHION4), Cushion(CUSHION5), Cushion(CUSHION6), Cushion(S_CP_TL_1), Cushion(S_CP_TL_2), Cushion(S_MP_T_1), Cushion(S_MP_T_2), Cushion(S_CP_TR_1), Cushion(S_CP_TR_2), Cushion(S_CP_BR_1), Cushion(S_CP_BR_2), Cushion(S_MP_B_1), Cushion(S_MP_B_2), Cushion(S_CP_BL_1), Cushion(S_CP_BL_2)]
         self.space = pymunk.Space()
         self.static_body = self.space.static_body
         self.engine = engine
@@ -88,6 +90,24 @@ class Table:
                self.input_box.angle_input, True, pygame.Color("turquoise"))
             self.display_surface.blit(text, text.get_rect())
             self.draw_line()
+        pygame.draw.line(self.display_surface, BLACK, (160, 116), (160, 289), 1)
+        pygame.draw.line(self.display_surface, BLACK, (173, 102), (348, 102), 1)
+        pygame.draw.line(self.display_surface, BLACK, (370, 102), (546, 102), 1)
+        pygame.draw.line(self.display_surface, BLACK, (558, 116), (558, 289), 1)
+        pygame.draw.line(self.display_surface, BLACK, (370, 302), (546, 302), 1)
+        pygame.draw.line(self.display_surface, BLACK, (173, 302), (348, 302), 1)######
+        pygame.draw.line(self.display_surface, BLACK, (160, 116), (152, 110), 1)
+        pygame.draw.line(self.display_surface, BLACK, (173, 102), (167, 95), 1)
+        pygame.draw.line(self.display_surface, BLACK, (348, 102), (349, 95), 1)
+        pygame.draw.line(self.display_surface, BLACK, (370, 102), (369, 95), 1)
+        pygame.draw.line(self.display_surface, BLACK, (558, 116), (566, 110), 1)
+        pygame.draw.line(self.display_surface, BLACK, (546, 102), (552, 95), 1)
+        pygame.draw.line(self.display_surface, BLACK, (558, 289), (566, 294), 1)
+        pygame.draw.line(self.display_surface, BLACK, (546, 302), (552, 308), 1)
+        pygame.draw.line(self.display_surface, BLACK, (348, 302), (349, 308), 1)
+        pygame.draw.line(self.display_surface, BLACK, (370, 302), (369, 308), 1)
+        pygame.draw.line(self.display_surface, BLACK, (160, 289), (152, 294), 1)
+        pygame.draw.line(self.display_surface, BLACK, (173, 302), (167, 308), 1)
 
 
    
@@ -131,6 +151,7 @@ class Table:
                             ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
                             ball.body.velocity = (0, 0)
                         self.red_increment += 1
+                        self.red_balls_potted += 1
             for pocket in pocket_coords:
                 for ball in self.yellowball:
                     yellow_x_dist = abs((ball.body.position.x) - (pocket[0]))
@@ -166,6 +187,7 @@ class Table:
                             ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
                             ball.body.velocity = (0, 0)
                         self.yellow_increment += 1
+                        self.yellow_balls_potted += 1
             for pocket in pocket_coords:
                 cue_x_dist = abs((self.cueball.body.position.x) - (pocket[0]))
                 cue_y_dist = abs((self.cueball.body.position.y) - (pocket[1]))
@@ -174,8 +196,21 @@ class Table:
                     #print("self.cueball.image")
                     self.cueball.body.position = (260 - BALL_RADIUS * 2, 209 - BALL_RADIUS * 2)
                     self.cueball.body.velocity = (0, 0)
-            #for pocket in pocket_coords:
-            #    if self
+            for pocket in pocket_coords:
+                black_x_dist = abs((self.blackball.body.position.x) - (pocket[0]))
+                black_y_dist = abs((self.blackball.body.position.y) - (pocket[1]))
+                black_dist = math.sqrt((cue_x_dist**2) + (black_y_dist**2))
+                if black_dist < POCKET_RADIUS:
+                    # if self.red_balls_potted == 7 and self.yellow_balls_potted == 7:
+                    #     text = INPUT_FONT.render("Nice Job", True, pygame.color(RED))
+                    #     self.display_surface.blit(text, text.get_rect())
+                    # else:
+                    #     text = INPUT_FONT.render("Your Trash", True, pygame.color(REDE))
+                    #     self.display_surface.blit(text, text.get_rect())
+                    self.blackball.body.position = (618, 200)
+                    self.blackball.body.velocity = (0, 0)
+
+
         elif self.mode == 1:
             for pocket in pocket_coords:
                 for ball in self.redball:

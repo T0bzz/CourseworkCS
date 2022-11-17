@@ -49,7 +49,6 @@ TABLE_IMAGE = {}
 RADIUS = 5
 FRICTION = 0
 BALL_FONT = ("Agency FB", 10)
-balls_potted = []
 balls_notpotted = 15
 
 
@@ -70,23 +69,32 @@ INPUT_FONT = SysFont(None, 32)
 #Cushions coords
 
 #Left side
-CUSHION1 = (153, 110), (153, 295)
+CUSHION1 = (160, 116), (160, 289)
 #Top left
-CUSHION2 = (167, 101), (350, 101)
+CUSHION2 = (173, 102), (348, 102)
 #Top Right
-CUSHION3 = (369, 101), (552, 101)
+CUSHION3 = (370, 102), (546, 102)
 #Right side
-CUSHION4 = (557, 110), (557, 295)
+CUSHION4 = (558, 116), (558, 289)
 #Bottom right
-CUSHION5 = (369, 299), (552, 299)
+CUSHION5 = (370, 302), (546, 302)
 #Bottom left
-CUSHION6 = (167, 299), (350, 299)
+CUSHION6 = (173, 302), (348, 302)
 
-#Backdround box for table friction
-BOX_COORDS = (0, 0), (650, 370)
+#Coords for cusions surrounding pockets
+S_CP_TL_1 = (160, 116), (152, 110)
+S_CP_TL_2 = (173, 102), (167, 95)
+S_MP_T_1 = (348, 102), (349, 95)
+S_MP_T_2 = (370, 102), (369, 95)
+S_CP_TR_1 = (558, 116), (566, 110)
+S_CP_TR_2 = (546, 102), (552, 95)
+S_CP_BR_1 = (558, 289), (566, 294)
+S_CP_BR_2 = (546, 302), (552, 308)
+S_MP_B_1 = (348, 302), (349, 309)
+S_MP_B_2 = (370, 302), (369, 308)
+S_CP_BL_1 = (160, 289), (152, 294)
+S_CP_BL_2 = (173, 302), (167, 308)
 
-#Slowing balls down
-SLOW_BALL = pygame.time.get_ticks() + 1 * 1000
 
 #Red ball coords
 RED1 = (483, 204)
@@ -110,19 +118,19 @@ Yellow7 = (511, 219)
 Black1 = (492, 199)
 
 #Corner pocket radius, coords
-POCKET_RADIUS = 17
+POCKET_RADIUS = 18
 pocket_coords = [ 
     (150, 93), #Top left
-    (560, 93), #Top right
+    (569, 93), #Top right
     (150, 312), #Bottom left
-    (560, 312), #Bottom right
+    (569, 312), #Bottom right
     (359, 85), #Top middle
     (359, 321) #Bottom middle
 ]
 CP_TL = (150, 93)
-CP_TR = (560, 93)
+CP_TR = (569, 93)
 CP_BL = (150, 312)
-CP_BR = (560, 312)
+CP_BR = (570, 312)
 MP_T = (359, 93)
 MP_B = (359, 312)
 
