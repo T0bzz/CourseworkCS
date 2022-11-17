@@ -29,7 +29,7 @@ SF = WIDTH / DS_WIDTH
 FPS = 120
 
 # debug
-debug = True
+debug = False
 
 # files
 GAME_FOLDER = path.dirname(__file__)
@@ -110,7 +110,7 @@ Yellow7 = (511, 219)
 Black1 = (492, 199)
 
 #Corner pocket radius, coords
-POCKET_RADIUS = 14.5
+POCKET_RADIUS = 17
 pocket_coords = [ 
     (150, 93), #Top left
     (560, 93), #Top right
@@ -135,8 +135,8 @@ DIRECTION = 1
 
 
 #Balls postted coordinates
-REDS = [(187, 342), (202, 342), (218, 342), (235, 342), (251, 342), (267, 342), (280, 342)]
-YELLOWS = [(187, 362), (202, 362), (218, 362), (235, 362), (251, 362), (267, 362), (280, 362)]
+REDS = (187, 342)
+YELLOWS = (187, 362)
 
 
 

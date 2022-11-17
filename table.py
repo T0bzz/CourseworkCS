@@ -15,7 +15,10 @@ class Table:
     def __init__(self, engine, display_surface, x, y, mode):
         self.x = x
         self.y = y
+        self.red_increment = 0
+        self.yellow_increment = 0
         self.mode = mode
+        self.coords_potted = [0, 30, 60, 90, 120, 150, 180]
         self.force = FORCE 
         self.max_force = MAX_FORCE
         self.direction = DIRECTION
@@ -30,23 +33,28 @@ class Table:
         self.cueball = Cueball(260 - BALL_RADIUS * 2, 209 - BALL_RADIUS * 2, 5, self.static_body)
         if self.mode == -1:
             self.redball = [Red_Ball(RED1, 5, self.static_body), Red_Ball(RED2, 5, self.static_body), Red_Ball(RED3, 5, self.static_body), Red_Ball(RED4, 5, self.static_body), Red_Ball(RED5, 5, self.static_body), Red_Ball(RED6, 5, self.static_body), Red_Ball(RED7, 5, self.static_body)]
+            self.yellowball = [Yellow_Ball(Yellow1, 5, self.static_body), Yellow_Ball(Yellow2, 5, self.static_body), Yellow_Ball(Yellow3, 5, self.static_body), Yellow_Ball(Yellow4, 5, self.static_body), Yellow_Ball(Yellow5, 5, self.static_body), Yellow_Ball(Yellow6, 5, self.static_body), Yellow_Ball(Yellow7, 5, self.static_body)]
+            self.blackball = Black_Ball(Black1, 5, self.static_body)
         elif self.mode == 1:
             self.redball = [Red_Ball(L_RED1, 5, self.static_body), Red_Ball(L_RED2, 5, self.static_body), Red_Ball(L_RED3, 5, self.static_body), Red_Ball(L_RED4, 5, self.static_body), Red_Ball(L_RED5, 5, self.static_body), Red_Ball(L_RED6, 5, self.static_body)]
-        self.yellowball = [Yellow_Ball(Yellow1, 5, self.static_body), Yellow_Ball(Yellow2, 5, self.static_body), Yellow_Ball(Yellow3, 5, self.static_body), Yellow_Ball(Yellow4, 5, self.static_body), Yellow_Ball(Yellow5, 5, self.static_body), Yellow_Ball(Yellow6, 5, self.static_body), Yellow_Ball(Yellow7, 5, self.static_body)]
-        self.blackball = Black_Ball(Black1, 1, self.static_body)
         self.pockets = [Pocket(CP_TL), Pocket(CP_TR), Pocket(CP_BL), Pocket(CP_BR), Pocket(MP_T), Pocket(MP_B)]
 
-        self.space.add(self.cueball.body, self.cueball.shape, self.cueball.pivot)
-        self.space.add(self.blackball.body, self.blackball.shape, self.blackball.pivot)
-        for cushion in self.cushions:
-            self.space.add(cushion.body, cushion.shape)
-        for redball in self.redball:
-            self.space.add(redball.body, redball.shape, redball.pivot)
-        for yellowball in self.yellowball:
-            self.space.add(yellowball.body, yellowball.shape, yellowball.pivot)
-        for pockets in self.pockets:
-            self.space.add(pockets.body, pockets.shape)
+
+
         
+        for cushion in self.cushions:
+                self.space.add(cushion.body, cushion.shape)
+        if self.mode == -1:
+            self.space.add(self.cueball.body, self.cueball.shape, self.cueball.pivot)
+            self.space.add(self.blackball.body, self.blackball.shape, self.blackball.pivot)
+            for redball in self.redball:
+                self.space.add(redball.body, redball.shape, redball.pivot)
+            for yellowball in self.yellowball:
+                self.space.add(yellowball.body, yellowball.shape, yellowball.pivot)
+        elif self.mode == 1:
+            self.space.add(self.cueball.body, self.cueball.shape, self.cueball.pivot)
+            for redball in self.redball:
+                self.space.add(redball.body, redball.shape, redball.pivot)
 
         self.input_box = Inputbox()
 
@@ -85,35 +93,131 @@ class Table:
    
     def pocket(self):
         #Red and yellow balls
-        for pocket in pocket_coords:
-            for ball in self.redball:
-                #print(pocket_coords)
-                #print(ball.body.position.x)
-                red_x_dist = abs((ball.body.position.x) - (pocket[0]))
-                red_y_dist = abs((ball.body.position.y) - (pocket[1]))
-                red_dist = math.sqrt((red_x_dist**2) + (red_y_dist**2))
-                if red_dist < POCKET_RADIUS:
-                    for ball_pos in REDS:
-                        ball.body.position = (ball_pos)
-                        ball.body.velocity = (0, 0)
-        for pocket in pocket_coords:
-            for ball in self.yellowball:
-                yellow_x_dist = abs((ball.body.position.x) - (pocket[0]))
-                yellow_y_dist = abs((ball.body.position.y) - (pocket[1]))
-                yellow_dist = math.sqrt((yellow_x_dist**2) + (yellow_y_dist**2))
-                if yellow_dist < POCKET_RADIUS:
-                    for ball_pos in YELLOWS:
-                        ball.body.position = (ball_pos)
-                        ball.body.velocity = (0, 0)
-        for pocket in pocket_coords:
-            cue_x_dist = abs((self.cueball.body.position.x) - (pocket[0]))
-            cue_y_dist = abs((self.cueball.body.position.y) - (pocket[1]))
-            cue_dist = math.sqrt((cue_x_dist**2) + (cue_y_dist**2))
-            if cue_dist < POCKET_RADIUS:
-                print("self.cueball.image")
-                self.cueball.body.position = (260 - BALL_RADIUS * 2, 209 - BALL_RADIUS * 2)
-                self.cueball.body.velocity = (0, 0)
-
+        if self.mode == -1:
+            for pocket in pocket_coords:
+                for ball in self.redball:
+                    #print(pocket_coords)
+                    #print(ball.body.position.x)
+                    red_x_dist = abs((ball.body.position.x) - (pocket[0]))
+                    red_y_dist = abs((ball.body.position.y) - (pocket[1]))
+                    red_dist = math.sqrt((red_x_dist**2) + (red_y_dist**2))
+                    if red_dist < POCKET_RADIUS:
+                        if self.red_increment == 0:
+                            add_coord = self.coords_potted[0]
+                            ball.body.position = (REDS[0] + add_coord, REDS[1])
+                            ball.body.velocity = (0, 0)
+                        elif self.red_increment == 1:
+                            add_coord = self.coords_potted[1]
+                            ball.body.position = (REDS[0] + add_coord, REDS[1])
+                            ball.body.velocity = (0, 0)
+                        elif self.red_increment == 1:
+                            add_coord = self.coords_potted[2]
+                            ball.body.position = (REDS[0] + add_coord, REDS[1])
+                            ball.body.velocity = (0, 0)
+                        elif self.red_increment == 1:
+                            add_coord = self.coords_potted[3]
+                            ball.body.position = (REDS[0] + add_coord, REDS[1])
+                            ball.body.velocity = (0, 0)
+                        elif self.red_increment == 1:
+                            add_coord = self.coords_potted[5]
+                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
+                            ball.body.velocity = (0, 0)
+                        elif self.red_increment == 1:
+                            add_coord = self.coords_potted[6]
+                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
+                            ball.body.velocity = (0, 0)
+                        elif self.red_increment == 1:
+                            add_coord = self.coords_potted[7]
+                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
+                            ball.body.velocity = (0, 0)
+                        self.red_increment += 1
+            for pocket in pocket_coords:
+                for ball in self.yellowball:
+                    yellow_x_dist = abs((ball.body.position.x) - (pocket[0]))
+                    yellow_y_dist = abs((ball.body.position.y) - (pocket[1]))
+                    yellow_dist = math.sqrt((yellow_x_dist**2) + (yellow_y_dist**2))
+                    if yellow_dist < POCKET_RADIUS:
+                        if self.yellow_increment == 0:
+                            add_coord = self.coords_potted[0]
+                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
+                            ball.body.velocity = (0, 0)
+                        elif self.yellow_increment == 1:
+                            add_coord = self.coords_potted[1]
+                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
+                            ball.body.velocity = (0, 0)
+                        elif self.yellow_increment == 1:
+                            add_coord = self.coords_potted[2]
+                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
+                            ball.body.velocity = (0, 0)
+                        elif self.yellow_increment == 1:
+                            add_coord = self.coords_potted[3]
+                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
+                            ball.body.velocity = (0, 0)
+                        elif self.yellow_increment == 1:
+                            add_coord = self.coords_potted[5]
+                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
+                            ball.body.velocity = (0, 0)
+                        elif self.yellow_increment == 1:
+                            add_coord = self.coords_potted[6]
+                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
+                            ball.body.velocity = (0, 0)
+                        elif self.yellow_increment == 1:
+                            add_coord = self.coords_potted[7]
+                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
+                            ball.body.velocity = (0, 0)
+                        self.yellow_increment += 1
+            for pocket in pocket_coords:
+                cue_x_dist = abs((self.cueball.body.position.x) - (pocket[0]))
+                cue_y_dist = abs((self.cueball.body.position.y) - (pocket[1]))
+                cue_dist = math.sqrt((cue_x_dist**2) + (cue_y_dist**2))
+                if cue_dist < POCKET_RADIUS:
+                    #print("self.cueball.image")
+                    self.cueball.body.position = (260 - BALL_RADIUS * 2, 209 - BALL_RADIUS * 2)
+                    self.cueball.body.velocity = (0, 0)
+            #for pocket in pocket_coords:
+            #    if self
+        elif self.mode == 1:
+            for pocket in pocket_coords:
+                for ball in self.redball:
+                    #print("POCKET COORDS --------------------------------------------------------------------------------------------------------------------------------", pocket_coords)
+                    #print(ball.body.position.x)
+                    red_x_dist = abs((ball.body.position.x) - (pocket[0]))
+                    red_y_dist = abs((ball.body.position.y) - (pocket[1]))
+                    red_dist = math.sqrt((red_x_dist**2) + (red_y_dist**2))
+                    if red_dist < POCKET_RADIUS:
+                        if self.red_increment == 0:
+                            add_coord = self.coords_potted[0]
+                            ball.body.position = (REDS[0] + add_coord, REDS[1])
+                            ball.body.velocity = (0, 0)
+                        elif self.red_increment == 1:
+                            add_coord = self.coords_potted[1]
+                            ball.body.position = (REDS[0] + add_coord, REDS[1])
+                            ball.body.velocity = (0, 0)
+                        elif self.red_increment == 1:
+                            add_coord = self.coords_potted[2]
+                            ball.body.position = (REDS[0] + add_coord, REDS[1])
+                            ball.body.velocity = (0, 0)
+                        elif self.red_increment == 1:
+                            add_coord = self.coords_potted[3]
+                            ball.body.position = (REDS[0] + add_coord, REDS[1])
+                            ball.body.velocity = (0, 0)
+                        elif self.red_increment == 1:
+                            add_coord = self.coords_potted[5]
+                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
+                            ball.body.velocity = (0, 0)
+                        elif self.red_increment == 1:
+                            add_coord = self.coords_potted[6]
+                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
+                            ball.body.velocity = (0, 0)
+                        self.red_increment += 1
+            for pocket in pocket_coords:
+                cue_x_dist = abs((self.cueball.body.position.x) - (pocket[0]))
+                cue_y_dist = abs((self.cueball.body.position.y) - (pocket[1]))
+                cue_dist = math.sqrt((cue_x_dist**2) + (cue_y_dist**2))
+                if cue_dist < POCKET_RADIUS:
+                    #print("self.cueball.image")
+                    self.cueball.body.position = (260 - BALL_RADIUS * 2, 209 - BALL_RADIUS * 2)
+                    self.cueball.body.velocity = (0, 0)
 
     def ball_velocity(self):
         stopped = False
@@ -132,7 +236,7 @@ class Table:
             #print("Angle:------------------------------------------------------------------------------", angle)
             x_pos = cos(radians(angle))
             y_pos = sin(radians(angle))
-            print("Y_POSITION -------------------------------------------------------------------------------------------------------", y_pos)
+            #print("Y_POSITION -------------------------------------------------------------------------------------------------------", y_pos)
             #print("x position", x_pos)
             # print("y position", y_pos)
             # print("INAVLID END POINT", (self.cueball.body.position.x + 25) * x_pos)
@@ -142,15 +246,15 @@ class Table:
             pass
 
     def update(self):
-        print("----------------------------------------------------------------------------------------------------")
+        #print("----------------------------------------------------------------------------------------------------")
         self.pocket()
-        print("Redball:", self.redball[1].body.velocity)
-        print("Cueball:", self.cueball.body.velocity)
-        print("Cueball position y:", self.cueball.body.position.y)
-        self.space.step(1/480)
+        # print("Redball:", self.redball[1].body.velocity)
+        # print("Cueball:", self.cueball.body.velocity)
+        # print("Cueball position y:", self.cueball.body.position.y)
+        self.space.step(1/510)
         self.draw_line()
         if self.input_box.play and self.ball_velocity() == True:
-            print("Hello")
+            #print("Hello")
             self.cueball.move((self.cueball.body.position), self.input_box.angle_input)
         else:
             pass
