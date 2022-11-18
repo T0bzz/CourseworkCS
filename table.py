@@ -199,18 +199,10 @@ class Table:
             for pocket in pocket_coords:
                 black_x_dist = abs((self.blackball.body.position.x) - (pocket[0]))
                 black_y_dist = abs((self.blackball.body.position.y) - (pocket[1]))
-                black_dist = math.sqrt((cue_x_dist**2) + (black_y_dist**2))
+                black_dist = math.sqrt((black_x_dist**2) + (black_y_dist**2))
                 if black_dist < POCKET_RADIUS:
-                    # if self.red_balls_potted == 7 and self.yellow_balls_potted == 7:
-                    #     text = INPUT_FONT.render("Nice Job", True, pygame.color(RED))
-                    #     self.display_surface.blit(text, text.get_rect())
-                    # else:
-                    #     text = INPUT_FONT.render("Your Trash", True, pygame.color(REDE))
-                    #     self.display_surface.blit(text, text.get_rect())
                     self.blackball.body.position = (618, 200)
                     self.blackball.body.velocity = (0, 0)
-
-
         elif self.mode == 1:
             for pocket in pocket_coords:
                 for ball in self.redball:
@@ -263,6 +255,17 @@ class Table:
             if self.cueball.body.velocity == (0, 0) and self.redball[0].body.velocity == (0, 0) and self.redball[1].body.velocity == (0, 0) and self.redball[2].body.velocity == (0, 0) and self.redball[3].body.velocity == (0, 0) and self.redball[4].body.velocity == (0, 0) and self.redball[5].body.velocity == (0, 0):
                 stopped = True
         return stopped
+        
+
+    def Game_Over(self):
+        GameOver = False
+        if (self.red_balls_potted != 7 or self.yellow_balls_potted != 7) and self.blackball.body.position == (618, 200):
+            print("Game Lost")
+            GameOver = True
+        elif self.red_balls_potted == 7 and self.yellow_balls_potted == 7 and self.blackball.body.position == (618, 200):
+            print("Game Won")
+            GameOver = True
+        return GameOver
 
     
     def draw_line(self):
@@ -295,4 +298,7 @@ class Table:
             pass
         if self.input_box.play:
             self.input_box.play = False
+        if self.Game_Over() == True:
+            pygame.quit()
+            exit()
 

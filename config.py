@@ -118,7 +118,7 @@ Yellow7 = (511, 219)
 Black1 = (492, 199)
 
 #Corner pocket radius, coords
-POCKET_RADIUS = 18
+POCKET_RADIUS = 19
 pocket_coords = [ 
     (150, 93), #Top left
     (569, 93), #Top right

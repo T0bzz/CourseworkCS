@@ -23,7 +23,7 @@ class Cueball:
     def move(self, pos, angle):
         try:
             self.angle = float(angle[7:11])
-            print("This is the angle inout:", self.angle)
+            print("This is the angle input:", self.angle)
             self.force = 8000
             self.x_impulse = cos(radians(self.angle))
             self.y_impulse = sin(radians(self.angle))
