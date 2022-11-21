@@ -20,6 +20,7 @@ class Table:
         self.red_balls_potted = 0
         self.yellow_balls_potted = 0
         self.mode = mode
+        self.display_surface = display_surface
         self.coords_potted = [0, 30, 60, 90, 120, 150, 180]
         self.direction = DIRECTION
         self.cushions = [Cushion(CUSHION1), Cushion(CUSHION2), Cushion(
@@ -27,7 +28,6 @@ class Table:
         self.space = pymunk.Space()
         self.static_body = self.space.static_body
         self.engine = engine
-        self.display_surface = display_surface
         self.image = pygame.image.load(
             path.join(TABLE_FOLDER, "Table.png")).convert_alpha()
         self.cueball = Cueball(260 - BALL_RADIUS * 2, 209 - BALL_RADIUS * 2, 5, self.static_body)
@@ -37,7 +37,8 @@ class Table:
             self.blackball = Black_Ball(Black1, 5, self.static_body)
         elif self.mode == 1:
             self.redball = [Red_Ball(L_RED1, 5, self.static_body), Red_Ball(L_RED2, 5, self.static_body), Red_Ball(L_RED3, 5, self.static_body), Red_Ball(L_RED4, 5, self.static_body), Red_Ball(L_RED5, 5, self.static_body), Red_Ball(L_RED6, 5, self.static_body)]
-        self.pockets = [Pocket(CP_TL), Pocket(CP_TR), Pocket(CP_BL), Pocket(CP_BR), Pocket(MP_T), Pocket(MP_B)]
+        self.pockets = [Pocket(CP_TL), Pocket(CP_TR), Pocket(CP_BL), Pocket(CP_BR), Pocket(MP_T), Pocket(MP_B)]       
+        self.GameOver = self.Game_Over()
 
 
 
@@ -218,15 +219,16 @@ class Table:
                             ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
                             ball.body.velocity = (0, 0)
                         self.red_increment += 1
-            for pocket in pocket_coords:
-                cue_x_dist = abs((self.cueball.body.position.x) - (pocket[0]))
-                cue_y_dist = abs((self.cueball.body.position.y) - (pocket[1]))
-                cue_dist = math.sqrt((cue_x_dist**2) + (cue_y_dist**2))
-                if cue_dist < POCKET_RADIUS:
-                    #print("self.cueball.image")
-                    if self.ball_velocity() == True:
-                        self.cueball.body.position = (260 - BALL_RADIUS * 2, 209 - BALL_RADIUS * 2)
-                        self.cueball.body.velocity = (0, 0)
+        for pocket in pocket_coords:
+            cue_x_dist = abs((self.cueball.body.position.x) - (pocket[0]))
+            cue_y_dist = abs((self.cueball.body.position.y) - (pocket[1]))
+            cue_dist = math.sqrt((cue_x_dist**2) + (cue_y_dist**2))
+            if cue_dist < POCKET_RADIUS:
+                self.cueball.body.velocity = (0, 0)
+                #print("self.cueball.image")
+                if self.ball_velocity() == True:
+                    self.cueball.body.position = (260 - BALL_RADIUS * 2, 209 - BALL_RADIUS * 2)
+                    
 
     def ball_velocity(self):
         stopped = False
@@ -241,12 +243,15 @@ class Table:
 
     def Game_Over(self):
         GameOver = False
-        if (self.red_balls_potted != 7 or self.yellow_balls_potted != 7) and self.blackball.body.position == (618, 200):
-            print("Game Lost")
-            GameOver = True
-        elif self.red_balls_potted == 7 and self.yellow_balls_potted == 7 and self.blackball.body.position == (618, 200):
-            print("Game Won")
-            GameOver = True
+        if self.mode == -1:
+            if self.red_balls_potted != 7 and self.yellow_balls_potted != 7 and self.blackball.body.position == (618, 200):
+                print("Game Lost")
+                GameOver = True
+            elif self.red_balls_potted == 7 and self.yellow_balls_potted == 7 and self.blackball.body.position == (618, 200):
+                print("Game Won")
+                GameOver = True
+        else:
+            pass
         return GameOver
 
     
@@ -271,7 +276,7 @@ class Table:
         # print("Redball:", self.redball[1].body.velocity)
         # print("Cueball:", self.cueball.body.velocity)
         # print("Cueball position y:", self.cueball.body.position.y)
-        self.space.step(1/510)
+        self.space.step(1/1000)
         self.draw_line()
         if self.input_box.play and self.ball_velocity() == True:
             #print("Hello")
@@ -280,8 +285,4 @@ class Table:
             pass
         if self.input_box.play:
             self.input_box.play = False
-        if self.mode == -1:
-            if self.Game_Over() == True:
-                pygame.quit()
-                exit()
 

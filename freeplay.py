@@ -22,6 +22,9 @@ class Freeplay:
     def standard(self):
         self.table.update()
         self.draw()
+        if self.table.Game_Over() == True:
+            print("Restart -----------------------------------------------------------------------")
+            self.game.restart()
 
     def draw(self):
         self.display_surface.fill(BLUE)

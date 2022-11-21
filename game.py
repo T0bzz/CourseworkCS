@@ -39,5 +39,5 @@ class Game:
                 pygame.quit()
                 exit(0)
 
-    
-
+    def restart(self):
+        self.current_mode = MainMenu(self, self.screen, self.display_surface, self.engine)
