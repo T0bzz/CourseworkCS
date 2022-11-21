@@ -21,7 +21,6 @@ class Table:
         self.yellow_balls_potted = 0
         self.mode = mode
         self.coords_potted = [0, 30, 60, 90, 120, 150, 180]
-        self.max_force = MAX_FORCE
         self.direction = DIRECTION
         self.cushions = [Cushion(CUSHION1), Cushion(CUSHION2), Cushion(
             CUSHION3), Cushion(CUSHION4), Cushion(CUSHION5), Cushion(CUSHION6), Cushion(S_CP_TL_1), Cushion(S_CP_TL_2), Cushion(S_MP_T_1), Cushion(S_MP_T_2), Cushion(S_CP_TR_1), Cushion(S_CP_TR_2), Cushion(S_CP_BR_1), Cushion(S_CP_BR_2), Cushion(S_MP_B_1), Cushion(S_MP_B_2), Cushion(S_CP_BL_1), Cushion(S_CP_BL_2)]
@@ -62,8 +61,6 @@ class Table:
 
     def input_handler(self, event):
         self.input_box.input_handler_angle(event)
-        self.input_box.input_handler_force(event)
-        return self.input_box.force_input
 
 
     def draw(self):
@@ -281,7 +278,7 @@ class Table:
             self.cueball.move((self.cueball.body.position), self.input_box.angle_input)
         else:
             pass
-        if self.input_box.update():
+        if self.input_box.play:
             self.input_box.play = False
         if self.mode == -1:
             if self.Game_Over() == True:

@@ -5,7 +5,7 @@ from math import sin, cos, tan, degrees, radians
 
 
 class Cueball:
-    def __init__(self, x, y, mass, static_body, force):
+    def __init__(self, x, y, mass, static_body):
         self.x = x 
         self.y = y 
         self.body = pymunk.Body()
@@ -16,8 +16,8 @@ class Cueball:
         self.body.position = (self.x, self.y)
         self.pivot = pymunk.PivotJoint(static_body, self.body, (0, 0), (0, 0))
         self.pivot.max_bias = 0
-        self.pivot.max_force = 1200
-        self.force = force
+        self.pivot.max_force = 1200#
+        self.force = 8000
         
         
                 
@@ -25,7 +25,6 @@ class Cueball:
         try:
             self.angle = float(angle[7:11])
             print("This is the angle input:", self.angle)
-            self.force = 7000
             self.x_impulse = cos(radians(self.angle))
             self.y_impulse = sin(radians(self.angle))
             print("Y impulse ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------", self.y_impulse)
