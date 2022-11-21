@@ -21,7 +21,6 @@ class Table:
         self.yellow_balls_potted = 0
         self.mode = mode
         self.coords_potted = [0, 30, 60, 90, 120, 150, 180]
-        self.force = FORCE 
         self.max_force = MAX_FORCE
         self.direction = DIRECTION
         self.cushions = [Cushion(CUSHION1), Cushion(CUSHION2), Cushion(
@@ -62,7 +61,9 @@ class Table:
 
 
     def input_handler(self, event):
-        self.input_box.input_handler(event)
+        self.input_box.input_handler_angle(event)
+        self.input_box.input_handler_force(event)
+        return self.input_box.force_input
 
 
     def draw(self):
@@ -90,24 +91,7 @@ class Table:
                self.input_box.angle_input, True, pygame.Color("turquoise"))
             self.display_surface.blit(text, text.get_rect())
             self.draw_line()
-        pygame.draw.line(self.display_surface, BLACK, (160, 116), (160, 289), 1)
-        pygame.draw.line(self.display_surface, BLACK, (173, 102), (348, 102), 1)
-        pygame.draw.line(self.display_surface, BLACK, (370, 102), (546, 102), 1)
-        pygame.draw.line(self.display_surface, BLACK, (558, 116), (558, 289), 1)
-        pygame.draw.line(self.display_surface, BLACK, (370, 302), (546, 302), 1)
-        pygame.draw.line(self.display_surface, BLACK, (173, 302), (348, 302), 1)######
-        pygame.draw.line(self.display_surface, BLACK, (160, 116), (152, 110), 1)
-        pygame.draw.line(self.display_surface, BLACK, (173, 102), (167, 95), 1)
-        pygame.draw.line(self.display_surface, BLACK, (348, 102), (349, 95), 1)
-        pygame.draw.line(self.display_surface, BLACK, (370, 102), (369, 95), 1)
-        pygame.draw.line(self.display_surface, BLACK, (558, 116), (566, 110), 1)
-        pygame.draw.line(self.display_surface, BLACK, (546, 102), (552, 95), 1)
-        pygame.draw.line(self.display_surface, BLACK, (558, 289), (566, 294), 1)
-        pygame.draw.line(self.display_surface, BLACK, (546, 302), (552, 308), 1)
-        pygame.draw.line(self.display_surface, BLACK, (348, 302), (349, 308), 1)
-        pygame.draw.line(self.display_surface, BLACK, (370, 302), (369, 308), 1)
-        pygame.draw.line(self.display_surface, BLACK, (160, 289), (152, 294), 1)
-        pygame.draw.line(self.display_surface, BLACK, (173, 302), (167, 308), 1)
+        
 
 
    
@@ -243,8 +227,9 @@ class Table:
                 cue_dist = math.sqrt((cue_x_dist**2) + (cue_y_dist**2))
                 if cue_dist < POCKET_RADIUS:
                     #print("self.cueball.image")
-                    self.cueball.body.position = (260 - BALL_RADIUS * 2, 209 - BALL_RADIUS * 2)
-                    self.cueball.body.velocity = (0, 0)
+                    if self.ball_velocity() == True:
+                        self.cueball.body.position = (260 - BALL_RADIUS * 2, 209 - BALL_RADIUS * 2)
+                        self.cueball.body.velocity = (0, 0)
 
     def ball_velocity(self):
         stopped = False
@@ -279,7 +264,7 @@ class Table:
             # print("y position", y_pos)
             # print("INAVLID END POINT", (self.cueball.body.position.x + 25) * x_pos)
             if self.ball_velocity():
-                pygame.draw.line(self.display_surface, YELLOW, (self.cueball.body.position.x+5, self.cueball.body.position.y+5), (-(8000 * x_pos)*20, -(8000*y_pos)*20), 1)
+                pygame.draw.line(self.display_surface, YELLOW, (self.cueball.body.position.x+5, self.cueball.body.position.y+5), (-(self.cueball.force * x_pos)*20, -(self.cueball.force*y_pos)*20), 1)
         except ValueError:
             pass
 
@@ -296,9 +281,10 @@ class Table:
             self.cueball.move((self.cueball.body.position), self.input_box.angle_input)
         else:
             pass
-        if self.input_box.play:
+        if self.input_box.update():
             self.input_box.play = False
-        if self.Game_Over() == True:
-            pygame.quit()
-            exit()
+        if self.mode == -1:
+            if self.Game_Over() == True:
+                pygame.quit()
+                exit()
 
