@@ -40,7 +40,8 @@ POCKET_FOLDER = path.join(ASSETS_FOLDER, "pocket")
 CUEBALL_FOLDER = path.join(ASSETS_FOLDER, "cueball")
 BALL_FOLDER = path.join(ASSETS_FOLDER, "balls")
 CUESTICK_FOLDER = path.join(ASSETS_FOLDER, "cuestick")
-CUE_IMAGE_ = pygame.image.load(path.join(CUESTICK_FOLDER, "cue.png"))
+SETTINGS_IMAGES_FOLDER = path.join(BUTTONS_FOLDER, "Settings")
+#CUE_IMAGE_ = pygame.image.load(path.join(CUESTICK_FOLDER, "cue.png"))
 #CUE_IMAGE_SCALED = pygame.transform.rotozoom(CUE_IMAGE_ORIGINAL, 0, 0.09)
 
 BUTTONS = {}
@@ -136,7 +137,7 @@ MP_B = (359, 312)
 
 
 #Cue variables
-FORCE = 100
+FORCE = 8000
 MAX_FORCE = 19000
 DIRECTION = 1
 

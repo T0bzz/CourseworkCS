@@ -16,8 +16,8 @@ class Cueball:
         self.body.position = (self.x, self.y)
         self.pivot = pymunk.PivotJoint(static_body, self.body, (0, 0), (0, 0))
         self.pivot.max_bias = 0
-        self.pivot.max_force = 1200#
-        self.force = 8000
+        self.pivot.max_force = 1200
+        self.force = FORCE
         
         
                 

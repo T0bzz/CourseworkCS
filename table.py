@@ -103,37 +103,39 @@ class Table:
                     red_x_dist = abs((ball.body.position.x) - (pocket[0]))
                     red_y_dist = abs((ball.body.position.y) - (pocket[1]))
                     red_dist = math.sqrt((red_x_dist**2) + (red_y_dist**2))
-                    if red_dist < POCKET_RADIUS:
-                        if self.red_increment == 0:
-                            add_coord = self.coords_potted[0]
-                            ball.body.position = (REDS[0] + add_coord, REDS[1])
-                            ball.body.velocity = (0, 0)
-                        elif self.red_increment == 1:
-                            add_coord = self.coords_potted[1]
-                            ball.body.position = (REDS[0] + add_coord, REDS[1])
-                            ball.body.velocity = (0, 0)
-                        elif self.red_increment == 1:
-                            add_coord = self.coords_potted[2]
-                            ball.body.position = (REDS[0] + add_coord, REDS[1])
-                            ball.body.velocity = (0, 0)
-                        elif self.red_increment == 1:
-                            add_coord = self.coords_potted[3]
-                            ball.body.position = (REDS[0] + add_coord, REDS[1])
-                            ball.body.velocity = (0, 0)
-                        elif self.red_increment == 1:
-                            add_coord = self.coords_potted[5]
-                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
-                            ball.body.velocity = (0, 0)
-                        elif self.red_increment == 1:
-                            add_coord = self.coords_potted[6]
-                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
-                            ball.body.velocity = (0, 0)
-                        elif self.red_increment == 1:
-                            add_coord = self.coords_potted[7]
-                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
-                            ball.body.velocity = (0, 0)
-                        self.red_increment += 1
-                        self.red_balls_potted += 1
+                    for i in range(100):
+                        if red_dist < POCKET_RADIUS:
+                            print("Red ball potted", i)
+                            if self.red_increment == 0:
+                                add_coord = self.coords_potted[0]
+                                ball.body.position = (REDS[0] + add_coord, REDS[1])
+                                ball.body.velocity = (0, 0)
+                            elif self.red_increment == 1:
+                                add_coord = self.coords_potted[1]
+                                ball.body.position = (REDS[0] + add_coord, REDS[1])
+                                ball.body.velocity = (0, 0)
+                            elif self.red_increment == 2:
+                                add_coord = self.coords_potted[2]
+                                ball.body.position = (REDS[0] + add_coord, REDS[1])
+                                ball.body.velocity = (0, 0)
+                            elif self.red_increment == 1:
+                                add_coord = self.coords_potted[3]
+                                ball.body.position = (REDS[0] + add_coord, REDS[1])
+                                ball.body.velocity = (0, 0)
+                            elif self.red_increment == 3:
+                                add_coord = self.coords_potted[5]
+                                ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
+                                ball.body.velocity = (0, 0)
+                            elif self.red_increment == 4:
+                                add_coord = self.coords_potted[6]
+                                ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
+                                ball.body.velocity = (0, 0)
+                            elif self.red_increment == 5:
+                                add_coord = self.coords_potted[7]
+                                ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
+                                ball.body.velocity = (0, 0)
+                            self.red_increment += 1
+                            self.red_balls_potted += 1
             for pocket in pocket_coords:
                 for ball in self.yellowball:
                     yellow_x_dist = abs((ball.body.position.x) - (pocket[0]))
@@ -148,23 +150,23 @@ class Table:
                             add_coord = self.coords_potted[1]
                             ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
                             ball.body.velocity = (0, 0)
-                        elif self.yellow_increment == 1:
+                        elif self.yellow_increment == 2:
                             add_coord = self.coords_potted[2]
                             ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
                             ball.body.velocity = (0, 0)
-                        elif self.yellow_increment == 1:
+                        elif self.yellow_increment == 3:
                             add_coord = self.coords_potted[3]
                             ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
                             ball.body.velocity = (0, 0)
-                        elif self.yellow_increment == 1:
+                        elif self.yellow_increment == 4:
                             add_coord = self.coords_potted[5]
                             ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
                             ball.body.velocity = (0, 0)
-                        elif self.yellow_increment == 1:
+                        elif self.yellow_increment == 5:
                             add_coord = self.coords_potted[6]
                             ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
                             ball.body.velocity = (0, 0)
-                        elif self.yellow_increment == 1:
+                        elif self.yellow_increment == 6:
                             add_coord = self.coords_potted[7]
                             ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
                             ball.body.velocity = (0, 0)
@@ -202,19 +204,19 @@ class Table:
                             add_coord = self.coords_potted[1]
                             ball.body.position = (REDS[0] + add_coord, REDS[1])
                             ball.body.velocity = (0, 0)
-                        elif self.red_increment == 1:
+                        elif self.red_increment == 2:
                             add_coord = self.coords_potted[2]
                             ball.body.position = (REDS[0] + add_coord, REDS[1])
                             ball.body.velocity = (0, 0)
-                        elif self.red_increment == 1:
+                        elif self.red_increment == 3:
                             add_coord = self.coords_potted[3]
                             ball.body.position = (REDS[0] + add_coord, REDS[1])
                             ball.body.velocity = (0, 0)
-                        elif self.red_increment == 1:
+                        elif self.red_increment == 4:
                             add_coord = self.coords_potted[5]
                             ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
                             ball.body.velocity = (0, 0)
-                        elif self.red_increment == 1:
+                        elif self.red_increment == 5:
                             add_coord = self.coords_potted[6]
                             ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
                             ball.body.velocity = (0, 0)
@@ -276,7 +278,7 @@ class Table:
         # print("Redball:", self.redball[1].body.velocity)
         # print("Cueball:", self.cueball.body.velocity)
         # print("Cueball position y:", self.cueball.body.position.y)
-        self.space.step(1/1000)
+        self.space.step(1/520)
         self.draw_line()
         if self.input_box.play and self.ball_velocity() == True:
             #print("Hello")
