@@ -11,7 +11,7 @@ class Level:
         self.mode = mode
         self.screen = screen
         self.display_surface = display_surface
-        self.table = Table(engine, display_surface, 0, 0, self.mode)
+        self.table = Table(self.game, self.engine, self.screen, self.display_surface, 0, 0, self.mode)
 
     def input_handler(self, event):
         self.table.input_handler(event)

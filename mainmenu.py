@@ -57,4 +57,4 @@ class MainMenu:
 
 
     def start_settings(self):
-        self.game.current_mode = Settings(self.game, self.engine, 0, self.screen, self.display_surface)
+        self.game.current_mode = Settings(self.game, self.screen, self.display_surface)

@@ -6,15 +6,16 @@ from config import *
 from pocket import Pocket
 from cushion import Cushion
 from ball import Cueball, Red_Ball, Yellow_Ball, Black_Ball
-from ball import Cueball
 from inputbox import Inputbox
-
+from settings import Settings
 
 
 class Table:
-    def __init__(self, engine, display_surface, x, y, mode):
+    def __init__(self, game, engine, screen, display_surface, x, y, mode):
         self.x = x
         self.y = y
+        self.game = game
+        self.screen = screen
         self.red_increment = 0
         self.yellow_increment = 0
         self.red_balls_potted = 0
@@ -40,8 +41,7 @@ class Table:
         self.pockets = [Pocket(CP_TL), Pocket(CP_TR), Pocket(CP_BL), Pocket(CP_BR), Pocket(MP_T), Pocket(MP_B)]       
         self.GameOver = self.Game_Over()
 
-
-
+        
         
         for cushion in self.cushions:
                 self.space.add(cushion.body, cushion.shape)
@@ -258,18 +258,21 @@ class Table:
 
     
     def draw_line(self):
-        try:
-            angle = float(self.input_box.angle_input[7:11])
-            #print("Angle:------------------------------------------------------------------------------", angle)
-            x_pos = cos(radians(angle))
-            y_pos = sin(radians(angle))
-            #print("Y_POSITION -------------------------------------------------------------------------------------------------------", y_pos)
-            #print("x position", x_pos)
-            # print("y position", y_pos)
-            # print("INAVLID END POINT", (self.cueball.body.position.x + 25) * x_pos)
-            if self.ball_velocity():
-                pygame.draw.line(self.display_surface, YELLOW, (self.cueball.body.position.x+5, self.cueball.body.position.y+5), (-(self.cueball.force * x_pos)*20, -(self.cueball.force*y_pos)*20), 1)
-        except ValueError:
+        if self.hard_mode == False:
+            try:
+                angle = float(self.input_box.angle_input[7:11])
+                #print("Angle:------------------------------------------------------------------------------", angle)
+                x_pos = cos(radians(angle))
+                y_pos = sin(radians(angle))
+                #print("Y_POSITION -------------------------------------------------------------------------------------------------------", y_pos)
+                #print("x position", x_pos)
+                # print("y position", y_pos)
+                # print("INAVLID END POINT", (self.cueball.body.position.x + 25) * x_pos)
+                if self.ball_velocity():
+                    pygame.draw.line(self.display_surface, YELLOW, (self.cueball.body.position.x+5, self.cueball.body.position.y+5), (-(self.cueball.force * x_pos)*20, -(self.cueball.force*y_pos)*20), 1)
+            except ValueError:
+                pass
+        else:
             pass
 
     def update(self):
