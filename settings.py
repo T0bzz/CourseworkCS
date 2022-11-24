@@ -31,7 +31,6 @@ class Settings:
 		self.draw()
 
 	def update(self):
-		print(self.hard_mode)
 		mouse_pos = pygame.mouse.get_pos()
 		for button in self.buttons:
 			button.update(mouse_pos)
@@ -47,7 +46,7 @@ class Settings:
 			self.hard_mode = True
 		else:
 			self.hard_mode = False
-		pygame.time.delay(100)
+		pygame.time.delay(150)
 
 	def go_back(self):
 		print("Back")

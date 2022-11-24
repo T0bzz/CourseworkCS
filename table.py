@@ -158,15 +158,15 @@ class Table:
                             ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
                             ball.body.velocity = (0, 0)
                         elif self.yellow_increment == 4:
-                            add_coord = self.coords_potted[5]
+                            add_coord = self.coords_potted[4]
                             ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
                             ball.body.velocity = (0, 0)
                         elif self.yellow_increment == 5:
-                            add_coord = self.coords_potted[6]
+                            add_coord = self.coords_potted[5]
                             ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
                             ball.body.velocity = (0, 0)
                         elif self.yellow_increment == 6:
-                            add_coord = self.coords_potted[7]
+                            add_coord = self.coords_potted[6]
                             ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
                             ball.body.velocity = (0, 0)
                         self.yellow_increment += 1
@@ -256,8 +256,8 @@ class Table:
         return GameOver
 
     
-    def draw_line(self, settings):
-        if settings.hard_mode == False:
+    def draw_line(self):
+        if self.settings.hard_mode == False:
             try:
                 angle = float(self.input_box.angle_input[7:11])
                 #print("Angle:------------------------------------------------------------------------------", angle)
@@ -279,7 +279,7 @@ class Table:
         # print("Cueball:", self.cueball.body.velocity)
         # print("Cueball position y:", self.cueball.body.position.y)
         self.space.step(1/520)
-        self.draw_line(self.settings)
+        self.draw_line()
         if self.input_box.play and self.ball_velocity() == True:
             #print("Hello")
             self.cueball.move((self.cueball.body.position), self.input_box.angle_input)
