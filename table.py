@@ -11,7 +11,7 @@ from settings import Settings
 
 
 class Table:
-    def __init__(self, game, engine, screen, display_surface, x, y, mode):
+    def __init__(self, game, engine, screen, display_surface, x, y, mode, settings):
         self.x = x
         self.y = y
         self.game = game
@@ -21,6 +21,7 @@ class Table:
         self.red_balls_potted = 0
         self.yellow_balls_potted = 0
         self.mode = mode
+        self.settings = settings
         self.display_surface = display_surface
         self.coords_potted = [0, 30, 60, 90, 120, 150, 180]
         self.direction = DIRECTION
@@ -41,8 +42,6 @@ class Table:
         self.pockets = [Pocket(CP_TL), Pocket(CP_TR), Pocket(CP_BL), Pocket(CP_BR), Pocket(MP_T), Pocket(MP_B)]       
         self.GameOver = self.Game_Over()
 
-        
-        
         for cushion in self.cushions:
                 self.space.add(cushion.body, cushion.shape)
         if self.mode == -1:
@@ -257,8 +256,8 @@ class Table:
         return GameOver
 
     
-    def draw_line(self):
-        if self.hard_mode == False:
+    def draw_line(self, settings):
+        if settings.hard_mode == False:
             try:
                 angle = float(self.input_box.angle_input[7:11])
                 #print("Angle:------------------------------------------------------------------------------", angle)
@@ -272,8 +271,6 @@ class Table:
                     pygame.draw.line(self.display_surface, YELLOW, (self.cueball.body.position.x+5, self.cueball.body.position.y+5), (-(self.cueball.force * x_pos)*20, -(self.cueball.force*y_pos)*20), 1)
             except ValueError:
                 pass
-        else:
-            pass
 
     def update(self):
         #print("----------------------------------------------------------------------------------------------------")
@@ -282,7 +279,7 @@ class Table:
         # print("Cueball:", self.cueball.body.velocity)
         # print("Cueball position y:", self.cueball.body.position.y)
         self.space.step(1/520)
-        self.draw_line()
+        self.draw_line(self.settings)
         if self.input_box.play and self.ball_velocity() == True:
             #print("Hello")
             self.cueball.move((self.cueball.body.position), self.input_box.angle_input)
@@ -290,4 +287,3 @@ class Table:
             pass
         if self.input_box.play:
             self.input_box.play = False
-

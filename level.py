@@ -5,13 +5,14 @@ from table import Table
 
 
 class Level:
-    def __init__(self, game, engine, mode, screen, display_surface):
+    def __init__(self, game, engine, mode, screen, display_surface, settings):
         self.game = game
         self.engine = engine
         self.mode = mode
         self.screen = screen
         self.display_surface = display_surface
-        self.table = Table(self.game, self.engine, self.screen, self.display_surface, 0, 0, self.mode)
+        self.settings = settings
+        self.table = Table(self.game, self.engine, self.screen, self.display_surface, 0, 0, self.mode, self.settings)
 
     def input_handler(self, event):
         self.table.input_handler(event)

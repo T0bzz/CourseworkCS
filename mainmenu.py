@@ -11,11 +11,12 @@ from settings import Settings
 
 
 class MainMenu:
-    def __init__(self, game, screen, display_surface, engine):
+    def __init__(self, game, screen, display_surface, engine, settings):
         self.game = game
         self.screen = screen
         self.display_surface = display_surface
         self.engine = engine
+        self.settings = settings
 
         folders = os.listdir(BUTTONS_FOLDER)
         for folder in folders:
@@ -50,11 +51,11 @@ class MainMenu:
 
     def start_freeplay(self):
         self.game.current_mode = Freeplay(
-            self.game, self.engine, -1, self.screen, self.display_surface)
+            self.game, self.engine, -1, self.screen, self.display_surface, self.settings)
 
     def start_level(self):
-        self.game.current_mode = Level(self.game, self.engine, 1, self.screen, self.display_surface)
+        self.game.current_mode = Level(self.game, self.engine, 1, self.screen, self.display_surface, self.settings)
 
 
     def start_settings(self):
-        self.game.current_mode = Settings(self.game, self.screen, self.display_surface)
+        self.game.current_mode = self.settings

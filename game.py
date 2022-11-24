@@ -3,6 +3,7 @@ from config import *
 from engine import Engine
 import pygame
 from mainmenu import MainMenu
+from settings import Settings
 
 
 
@@ -15,9 +16,10 @@ class Game:
         self.engine = Engine()
         self.screen = screen
         self.display_surface = display_surface
+        self.mainmenu = MainMenu(self, self.screen, self.display_surface, self.engine, Settings(self, self.screen, self.display_surface))
     
     def start(self):
-        self.current_mode = MainMenu(self, self.screen, self.display_surface, self.engine)
+        self.current_mode = self.mainmenu
         
 
     def update(self):
@@ -41,4 +43,4 @@ class Game:
                 exit(0)
 
     def restart(self):
-        self.current_mode = MainMenu(self, self.screen, self.display_surface, self.engine)
+        self.current_mode = self.mainmenu

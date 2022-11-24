@@ -31,6 +31,7 @@ class Settings:
 		self.draw()
 
 	def update(self):
+		print(self.hard_mode)
 		mouse_pos = pygame.mouse.get_pos()
 		for button in self.buttons:
 			button.update(mouse_pos)
