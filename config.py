@@ -3,6 +3,7 @@ from pygame.font import SysFont, init
 import pygame
 import codecs
 from os import path
+import random
 
 # Colour
 BLACK = (0, 0, 0)
@@ -153,12 +154,12 @@ YELLOWS = (187, 362)
 
 #Coords needed for the level
 
-L_RED1 = (547, 113)
-L_RED2 = (547, 291)
-L_RED3 = (359, 113)
-L_RED4 = (359, 291)
-L_RED5 = (174, 113)
-L_RED6 = (174, 291)
+L_RED1 = (random.randint(167, 549), random.randint(112, 290))
+L_RED2 = (random.randint(167, 549), random.randint(112, 290))
+L_RED3 = (random.randint(167, 549), random.randint(112, 290))
+L_RED4 = (random.randint(167, 549), random.randint(112, 290))
+L_RED5 = (random.randint(167, 549), random.randint(112, 290))
+L_RED6 = (random.randint(167, 549), random.randint(112, 290))
 
 
 

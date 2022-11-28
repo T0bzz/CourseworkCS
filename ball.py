@@ -33,7 +33,7 @@ class Cueball:
             self.x_impulse = cos(radians(self.angle))
             self.y_impulse = sin(radians(self.angle))
             #Applies an impulse on an object. Negatives are used to reverse the direction of force
-            self.body.apply_impulse_at_local_point(((self.force*self.x_impulse), -(self.force*self.y_impulse)))
+            self.body.apply_impulse_at_local_point((-(self.force*self.x_impulse), -(self.force*self.y_impulse)))
         except ValueError:
             pass
         
