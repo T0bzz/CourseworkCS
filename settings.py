@@ -1,4 +1,5 @@
-import pygame, math, sys
+#Import necessary libraries and files
+import pygame
 from os import path
 from button import Button
 from config import *
@@ -13,6 +14,7 @@ class Settings:
 		self.display_surface = display_surface
 		self.hard_mode = False
 
+		#Stores the folders and files needed such as in main menu
 		folders = os.listdir(BUTTONS_FOLDER)
 		for folder in folders:
 			BUTTONS[folder] = (pygame.image.load(path.join(BUTTONS_FOLDER, folder, "primary.png")).convert_alpha(), pygame.image.load(path.join(BUTTONS_FOLDER, folder, "secondary.png")).convert_alpha()) 
@@ -26,21 +28,25 @@ class Settings:
 	def input_handler(self, event):
 		return
 
+	#Calls the update and draw subroutines continuously
 	def standard(self):
 		self.update()
 		self.draw()
 
+	#Gets the mouse position
 	def update(self):
 		mouse_pos = pygame.mouse.get_pos()
 		for button in self.buttons:
 			button.update(mouse_pos)
 
+	#Draws the main backgrand as well as the buttons 
 	def draw(self):
 		self.screen.fill(WHITE)
 		for button in self.buttons:
 			self.screen.blit(button.current_image, (button.rect.x, button.rect.y))
 		pygame.display.flip()
 
+	#Changes the difficulty of the game when the user preses the button set
 	def set_difficulty(self):
 		if self.hard_mode == False:
 			self.hard_mode = True
@@ -48,6 +54,7 @@ class Settings:
 			self.hard_mode = False
 		pygame.time.delay(150)
 
+	#Subroutine for the back button, taking the user vack to the main menu
 	def go_back(self):
 		print("Back")
 		pygame.time.delay(100)

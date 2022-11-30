@@ -3,11 +3,9 @@ import pymunk
 import math
 from math import cos, sin, tan, radians
 from config import *
-from pocket import Pocket
 from cushion import Cushion
 from ball import Cueball, Red_Ball, Yellow_Ball, Black_Ball
 from inputbox import Inputbox
-from settings import Settings
 
 
 class Table:
@@ -38,10 +36,10 @@ class Table:
             self.yellowball = [Yellow_Ball(Yellow1, 5, self.static_body), Yellow_Ball(Yellow2, 5, self.static_body), Yellow_Ball(Yellow3, 5, self.static_body), Yellow_Ball(Yellow4, 5, self.static_body), Yellow_Ball(Yellow5, 5, self.static_body), Yellow_Ball(Yellow6, 5, self.static_body), Yellow_Ball(Yellow7, 5, self.static_body)]
             self.blackball = Black_Ball(Black1, 5, self.static_body)
         elif self.mode == 1:
-            self.redball = [Red_Ball(L_RED1, 5, self.static_body), Red_Ball(L_RED2, 5, self.static_body), Red_Ball(L_RED3, 5, self.static_body), Red_Ball(L_RED4, 5, self.static_body), Red_Ball(L_RED5, 5, self.static_body), Red_Ball(L_RED6, 5, self.static_body)]
-        self.pockets = [Pocket(CP_TL), Pocket(CP_TR), Pocket(CP_BL), Pocket(CP_BR), Pocket(MP_T), Pocket(MP_B)]       
+            self.redball = [Red_Ball(L_RED1, 5, self.static_body), Red_Ball(L_RED2, 5, self.static_body), Red_Ball(L_RED3, 5, self.static_body), Red_Ball(L_RED4, 5, self.static_body), Red_Ball(L_RED5, 5, self.static_body), Red_Ball(L_RED6, 5, self.static_body)]    
         self.GameOver = self.Game_Over()
 
+        #Adds objects to the pymunk space, allowing collisions to take place
         for cushion in self.cushions:
                 self.space.add(cushion.body, cushion.shape)
         if self.mode == -1:
@@ -58,11 +56,11 @@ class Table:
 
         self.input_box = Inputbox()
 
-
+    #Calls the input_handler_angle function from input_box
     def input_handler(self, event):
         self.input_box.input_handler_angle(event)
 
-
+    #Draws objects on the screen, including balls, the pool table and the input box
     def draw(self):
         if self.mode == -1:
             self.display_surface.blit(self.image, (self.x, self.y))
@@ -91,14 +89,12 @@ class Table:
         
 
 
-   
+   #Potts balls when the are in a given range, aswell as re-drawing the balls in certain positions based on the mode
     def pocket(self):
         #Red and yellow balls
         if self.mode == -1:
             for pocket in pocket_coords:
                 for ball in self.redball:
-                    #print(pocket_coords)
-                    #print(ball.body.position.x)
                     red_x_dist = abs((ball.body.position.x) - (pocket[0]))
                     red_y_dist = abs((ball.body.position.y) - (pocket[1]))
                     red_dist = math.sqrt((red_x_dist**2) + (red_y_dist**2))
@@ -115,19 +111,19 @@ class Table:
                             add_coord = self.coords_potted[2]
                             ball.body.position = (REDS[0] + add_coord, REDS[1])
                             ball.body.velocity = (0, 0)
-                        elif self.red_increment == 1:
+                        elif self.red_increment == 3:
                             add_coord = self.coords_potted[3]
                             ball.body.position = (REDS[0] + add_coord, REDS[1])
                             ball.body.velocity = (0, 0)
-                        elif self.red_increment == 3:
+                        elif self.red_increment == 4:
                             add_coord = self.coords_potted[4]
                             ball.body.position = (REDS[0] + add_coord, REDS[1])
                             ball.body.velocity = (0, 0)
-                        elif self.red_increment == 4:
+                        elif self.red_increment == 5:
                             add_coord = self.coords_potted[5]
                             ball.body.position = (REDS[0] + add_coord, REDS[1])
                             ball.body.velocity = (0, 0)
-                        elif self.red_increment == 5:
+                        elif self.red_increment == 6:
                             add_coord = self.coords_potted[6]
                             ball.body.position = (REDS[0] + add_coord, REDS[1])
                             ball.body.velocity = (0, 0)
@@ -141,31 +137,31 @@ class Table:
                     if yellow_dist < POCKET_RADIUS:
                         if self.yellow_increment == 0:
                             add_coord = self.coords_potted[0]
-                            ball.body.position = (YELLOWS[0] + add_coord, 374)
+                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS)
                             ball.body.velocity = (0, 0)
                         elif self.yellow_increment == 1:
                             add_coord = self.coords_potted[1]
-                            ball.body.position = (YELLOWS[0] + add_coord, 374)
+                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS)
                             ball.body.velocity = (0, 0)
                         elif self.yellow_increment == 2:
                             add_coord = self.coords_potted[2]
-                            ball.body.position = (YELLOWS[0] + add_coord, 374)
+                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS)
                             ball.body.velocity = (0, 0)
                         elif self.yellow_increment == 3:
                             add_coord = self.coords_potted[3]
-                            ball.body.position = (YELLOWS[0] + add_coord, 374)
+                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS)
                             ball.body.velocity = (0, 0)
                         elif self.yellow_increment == 4:
                             add_coord = self.coords_potted[4]
-                            ball.body.position = (YELLOWS[0] + add_coord, 374)
+                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS)
                             ball.body.velocity = (0, 0)
                         elif self.yellow_increment == 5:
                             add_coord = self.coords_potted[5]
-                            ball.body.position = (YELLOWS[0] + add_coord, 374)
+                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS)
                             ball.body.velocity = (0, 0)
                         elif self.yellow_increment == 6:
                             add_coord = self.coords_potted[6]
-                            ball.body.position = (YELLOWS[0] + add_coord, 374)
+                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS)
                             ball.body.velocity = (0, 0)
                         self.yellow_increment += 1
                         self.yellow_balls_potted += 1
@@ -187,8 +183,6 @@ class Table:
         elif self.mode == 1:
             for pocket in pocket_coords:
                 for ball in self.redball:
-                    #print("POCKET COORDS --------------------------------------------------------------------------------------------------------------------------------", pocket_coords)
-                    #print(ball.body.position.x)
                     red_x_dist = abs((ball.body.position.x) - (pocket[0]))
                     red_y_dist = abs((ball.body.position.y) - (pocket[1]))
                     red_dist = math.sqrt((red_x_dist**2) + (red_y_dist**2))
@@ -210,12 +204,12 @@ class Table:
                             ball.body.position = (REDS[0] + add_coord, REDS[1])
                             ball.body.velocity = (0, 0)
                         elif self.red_increment == 4:
-                            add_coord = self.coords_potted[5]
-                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
+                            add_coord = self.coords_potted[4]
+                            ball.body.position = (REDS[0] + add_coord, REDS[1])
                             ball.body.velocity = (0, 0)
                         elif self.red_increment == 5:
-                            add_coord = self.coords_potted[6]
-                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
+                            add_coord = self.coords_potted[5]
+                            ball.body.position = (REDS[0] + add_coord, REDS[1])
                             ball.body.velocity = (0, 0)
                         self.red_increment += 1
         for pocket in pocket_coords:
@@ -224,11 +218,10 @@ class Table:
             cue_dist = math.sqrt((cue_x_dist**2) + (cue_y_dist**2))
             if cue_dist < POCKET_RADIUS:
                 self.cueball.body.velocity = (0, 0)
-                #print("self.cueball.image")
                 if self.ball_velocity() == True:
                     self.cueball.body.position = (260 - BALL_RADIUS * 2, 209 - BALL_RADIUS * 2)
                     
-
+    #This function is used to detirmine whther or not the balls are stationary
     def ball_velocity(self):
         stopped = False
         if self.mode == -1:
@@ -239,7 +232,7 @@ class Table:
                 stopped = True
         return stopped
         
-
+    #Function is used to detirmine whther or not the black ball has been pottedand when to restart the program
     def Game_Over(self):
         GameOver = False
         if self.mode == -1:
@@ -249,33 +242,32 @@ class Table:
             elif self.red_balls_potted == 7 and self.yellow_balls_potted == 7 and self.blackball.body.position == (618, 200):
                 print("Game Won")
                 GameOver = True
-        else:
-            pass
+            else:
+                pass
+        elif self.mode == 1:
+            for ball in self.redball:
+                print("Complete 2")
+                if ball.body.position[1] not in range(71, 313):
+                    print("Game check")
+                    print("Game Completed")
+                    GameOver = True
         return GameOver
 
-    
+    #Draws the line used for aiming based whther the difficulty is set to hard or not
     def draw_line(self):
         if self.settings.hard_mode == False:
             try:
                 angle = float(self.input_box.angle_input[7:11])
-                #print("Angle:------------------------------------------------------------------------------", angle)
                 x_pos = cos(radians(angle))
                 y_pos = sin(radians(angle))
-                #print("Y_POSITION -------------------------------------------------------------------------------------------------------", y_pos)
-                #print("x position", x_pos)
-                # print("y position", y_pos)
-                # print("INAVLID END POINT", (self.cueball.body.position.x + 25) * x_pos)
                 if self.ball_velocity():
                     pygame.draw.line(self.display_surface, YELLOW, (self.cueball.body.position.x+5, self.cueball.body.position.y+5), (-(self.cueball.force * x_pos)*20, -(self.cueball.force*y_pos)*20), 1)
             except ValueError:
                 pass
 
+    #This subroutine is used to continuously update the game, calling necessary functions constantly, allowing the program to run animations smoothly and run checks such as check potted constantly
     def update(self):
-        #print("----------------------------------------------------------------------------------------------------")
         self.pocket()
-        # print("Redball:", self.redball[1].body.velocity)
-        # print("Cueball:", self.cueball.body.velocity)
-        # print("Cueball position y:", self.cueball.body.position.y)
         self.space.step(1/520)
         self.draw_line()
         if self.input_box.play and self.ball_velocity() == True:
@@ -285,3 +277,5 @@ class Table:
             pass
         if self.input_box.play:
             self.input_box.play = False
+        if self.GameOver == True:
+            self.game.restart()

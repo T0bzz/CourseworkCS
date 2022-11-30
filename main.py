@@ -22,6 +22,7 @@ def main(pr=None):
     game.start()
     while running:
         game.update()
+        pygame.display.flip()
 
 #Runs main function if the file name is main.py
 if __name__ == '__main__':

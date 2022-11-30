@@ -1,4 +1,4 @@
-from table import Table
+#Imports necessary files
 from config import *
 
 class Mode:
@@ -8,15 +8,11 @@ class Mode:
         self.number = number
         self.screen = screen
         self.display_surface = display_surface
-        
-        self.table = Table()
-
-        self.entities = []
-        self.particles = []
 
     def event_handler(self, event):
         pass
 
+    #Calls the update and draw subroutines
     def standard(self):
         self.update()
         self.draw()

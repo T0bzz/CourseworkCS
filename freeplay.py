@@ -4,7 +4,6 @@ from mode import Mode
 from config import *
 from math import cos, radians
 from table import Table
-from pocket import Pocket
 from ball import Cueball
 
 #Creates Freeplay class
@@ -38,4 +37,4 @@ class Freeplay:
         self.table.draw()
         pygame.transform.scale(self.display_surface,
                                (WIDTH, HEIGHT), dest_surface=self.screen)
-        pygame.display.flip()
+        
