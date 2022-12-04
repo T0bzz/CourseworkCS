@@ -265,11 +265,25 @@ class Table:
             except ValueError:
                 pass
 
+    def angle_type(self):
+        angle_type = ""
+        if float(self.input_box.angle_input[7:9]) < 90:
+            angle_type = "Acute"
+        elif float(self.input_box.angle_input[7:9]) >= 90 and float(self.input_box.angle_input[7:9]) < 180:
+            angle_type = "Obtuse"
+        else:
+            angle_type = "Reflex"
+        text = INPUT_FONT.render(angle_type, True, pygame.Color("turquoise"))
+        textRect = text.get_rect()
+        textRect.center = (358, 100)
+        self.display_surface.blit(text, textRect)
+
     #This subroutine is used to continuously update the game, calling necessary functions constantly, allowing the program to run animations smoothly and run checks such as check potted constantly
     def update(self):
         self.pocket()
         self.space.step(1/520)
         self.draw_line()
+        self.angle_type()
         if self.input_box.play and self.ball_velocity() == True:
             #print("Hello")
             self.cueball.move((self.cueball.body.position), self.input_box.angle_input)
@@ -279,3 +293,5 @@ class Table:
             self.input_box.play = False
         if self.GameOver == True:
             self.game.restart()
+        
+
