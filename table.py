@@ -86,6 +86,8 @@ class Table:
                self.input_box.angle_input, True, pygame.Color("turquoise"))
             self.display_surface.blit(text, text.get_rect())
             self.draw_line()
+        text_angle_type =   INPUT_FONT.render(self.angle_type(), True, pygame.Color("turquoise"))
+        self.display_surface.blit(text_angle_type, (0, 35))
         
 
 
@@ -137,31 +139,31 @@ class Table:
                     if yellow_dist < POCKET_RADIUS:
                         if self.yellow_increment == 0:
                             add_coord = self.coords_potted[0]
-                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS)
+                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
                             ball.body.velocity = (0, 0)
                         elif self.yellow_increment == 1:
                             add_coord = self.coords_potted[1]
-                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS)
+                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
                             ball.body.velocity = (0, 0)
                         elif self.yellow_increment == 2:
                             add_coord = self.coords_potted[2]
-                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS)
+                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
                             ball.body.velocity = (0, 0)
                         elif self.yellow_increment == 3:
                             add_coord = self.coords_potted[3]
-                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS)
+                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
                             ball.body.velocity = (0, 0)
                         elif self.yellow_increment == 4:
                             add_coord = self.coords_potted[4]
-                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS)
+                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
                             ball.body.velocity = (0, 0)
                         elif self.yellow_increment == 5:
                             add_coord = self.coords_potted[5]
-                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS)
+                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
                             ball.body.velocity = (0, 0)
                         elif self.yellow_increment == 6:
                             add_coord = self.coords_potted[6]
-                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS)
+                            ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
                             ball.body.velocity = (0, 0)
                         self.yellow_increment += 1
                         self.yellow_balls_potted += 1
@@ -267,16 +269,17 @@ class Table:
 
     def angle_type(self):
         angle_type = ""
-        if float(self.input_box.angle_input[7:9]) < 90:
-            angle_type = "Acute"
-        elif float(self.input_box.angle_input[7:9]) >= 90 and float(self.input_box.angle_input[7:9]) < 180:
-            angle_type = "Obtuse"
-        else:
-            angle_type = "Reflex"
-        text = INPUT_FONT.render(angle_type, True, pygame.Color("turquoise"))
-        textRect = text.get_rect()
-        textRect.center = (358, 100)
-        self.display_surface.blit(text, textRect)
+        try:
+            if float(self.input_box.angle_input[7:10]) <= 90:
+                angle_type = "Acute"
+            elif float(self.input_box.angle_input[7:10]) > 90 and float(self.input_box.angle_input[7:10]) <= 180:
+                angle_type = "Obtuse"
+            elif float(self.input_box.angle_input[7:10]) > 180:
+                angle_type = "Reflex"
+        except ValueError:
+            pass
+        return angle_type
+        
 
     #This subroutine is used to continuously update the game, calling necessary functions constantly, allowing the program to run animations smoothly and run checks such as check potted constantly
     def update(self):
