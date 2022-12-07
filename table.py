@@ -270,11 +270,13 @@ class Table:
     def angle_type(self):
         angle_type = ""
         try:
-            if float(self.input_box.angle_input[7:10]) <= 90:
+            if (float(self.input_box.angle_input[7:10])) % 360 == 90 or (float(self.input_box.angle_input[7:10])) % 360 == 270:
+                angle_type = "Right Angle"
+            elif (float(self.input_box.angle_input[7:10])) % 360 <= 90:
                 angle_type = "Acute"
-            elif float(self.input_box.angle_input[7:10]) > 90 and float(self.input_box.angle_input[7:10]) <= 180:
+            elif (float(self.input_box.angle_input[7:10])) % 360 > 90 and (float(self.input_box.angle_input[7:10])) % 360 <= 180:
                 angle_type = "Obtuse"
-            elif float(self.input_box.angle_input[7:10]) > 180:
+            elif (float(self.input_box.angle_input[7:10])) % 360 > 180:
                 angle_type = "Reflex"
         except ValueError:
             pass
