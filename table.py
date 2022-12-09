@@ -9,15 +9,15 @@ from inputbox import Inputbox
 
 
 class Table:
-    def __init__(self, game, engine, screen, display_surface, x, y, mode, settings):
+    def __init__(self, game, engine, screen, display_surface, x, y, mode, settings, red_balls_potted, yellow_balls_potted):
         self.x = x
         self.y = y
         self.game = game
         self.screen = screen
         self.red_increment = 0
         self.yellow_increment = 0
-        self.red_balls_potted = 0
-        self.yellow_balls_potted = 0
+        self.red_balls_potted = red_balls_potted
+        self.yellow_balls_potted = yellow_balls_potted
         self.mode = mode
         self.settings = settings
         self.display_surface = display_surface
@@ -214,6 +214,7 @@ class Table:
                             ball.body.position = (REDS[0] + add_coord, REDS[1])
                             ball.body.velocity = (0, 0)
                         self.red_increment += 1
+                        self.red_balls_potted += 1
         for pocket in pocket_coords:
             cue_x_dist = abs((self.cueball.body.position.x) - (pocket[0]))
             cue_y_dist = abs((self.cueball.body.position.y) - (pocket[1]))
@@ -247,12 +248,10 @@ class Table:
             else:
                 pass
         elif self.mode == 1:
-            for ball in self.redball:
-                print("Complete 2")
-                if ball.body.position[1] not in range(71, 313):
-                    print("Game check")
-                    print("Game Completed")
-                    GameOver = True
+            print("Testing")
+            if self.red_balls_potted == 6:
+                print("Complete")
+                GameOver = True
         return GameOver
 
     #Draws the line used for aiming based whther the difficulty is set to hard or not
@@ -296,7 +295,7 @@ class Table:
             pass
         if self.input_box.play:
             self.input_box.play = False
-        if self.GameOver == True:
+        if self.Game_Over() == True:
             self.game.restart()
         
 

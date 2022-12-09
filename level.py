@@ -13,7 +13,7 @@ class Level:
         self.screen = screen
         self.display_surface = display_surface
         self.settings = settings
-        self.table = Table(self.game, self.engine, self.screen, self.display_surface, 0, 0, self.mode, self.settings)
+        self.table = Table(self.game, self.engine, self.screen, self.display_surface, 0, 0, self.mode, self.settings, 0, 0)
 
     #Calls the input handler from the table class
     def input_handler(self, event):

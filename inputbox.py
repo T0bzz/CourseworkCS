@@ -13,7 +13,7 @@ class Inputbox():
         if event.type == pygame.TEXTINPUT:
             #Limits the valid inpouts from the user to improve security
             if event.text in "0123456789.-":
-                if len(self.angle_input) <= 12:
+                if len(self.angle_input) <= 9:
                     self.angle_input += event.text
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_BACKSPACE:
