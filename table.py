@@ -240,17 +240,13 @@ class Table:
         GameOver = False
         if self.mode == -1:
             if self.red_balls_potted != 7 and self.yellow_balls_potted != 7 and self.blackball.body.position == (618, 200):
-                print("Game Lost")
                 GameOver = True
             elif self.red_balls_potted == 7 and self.yellow_balls_potted == 7 and self.blackball.body.position == (618, 200):
-                print("Game Won")
                 GameOver = True
             else:
                 pass
         elif self.mode == 1:
-            print("Testing")
             if self.red_balls_potted == 6:
-                print("Complete")
                 GameOver = True
         return GameOver
 

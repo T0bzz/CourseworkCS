@@ -52,7 +52,7 @@ class Settings:
 			self.hard_mode = True
 		elif self.hard_mode == True:
 			self.hard_mode = False
-		pygame.time.delay(150)
+		#pygame.time.wait(10000000)
 
 	#Subroutine for the back button, taking the user vack to the main menu
 	def go_back(self):

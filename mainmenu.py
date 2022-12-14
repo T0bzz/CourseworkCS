@@ -26,7 +26,7 @@ class MainMenu:
 
         #Stores the folder of images needed in an array
         self.buttons = []
-        self.buttons.append(Button(760, 250, BUTTONS["Title"]))
+        self.buttons.append(Button(690, 250, BUTTONS["Title"]))
         self.buttons.append(
             Button(885, 400, BUTTONS["Freeplay"], self.start_freeplay))
         self.buttons.append(Button(885, 550, BUTTONS["Levels"], self.start_level))
