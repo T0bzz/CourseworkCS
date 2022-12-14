@@ -50,7 +50,7 @@ class Settings:
 	def set_difficulty(self):
 		if self.hard_mode == False:
 			self.hard_mode = True
-		else:
+		elif self.hard_mode == True:
 			self.hard_mode = False
 		pygame.time.delay(150)
 
