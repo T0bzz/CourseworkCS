@@ -292,6 +292,6 @@ class Table:
         if self.input_box.play:
             self.input_box.play = False
         if self.Game_Over() == True:
-            self.game.restart()
+            self.game.start()
         
 

@@ -27,9 +27,6 @@ class Freeplay:
     def standard(self):
         self.table.update()
         self.draw()
-        if self.table.Game_Over() == True:
-            print("Restart -----------------------------------------------------------------------")
-            self.game.restart()
 
             #Calls draw in Table, as well as drawing the main background aand scaling
     def draw(self):

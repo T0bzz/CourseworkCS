@@ -75,7 +75,7 @@ CUSHION1 = (156, 116), (156, 289)
 #Top left
 CUSHION2 = (173, 98), (348, 98)
 #Top Right
-CUSHION3 = (370, 98), (546, 198)
+CUSHION3 = (370, 98), (546, 98)
 #Right side
 CUSHION4 = (554, 116), (554, 289)
 #Bottom right
