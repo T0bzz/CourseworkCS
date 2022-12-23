@@ -82,6 +82,8 @@ CUSHION4 = (558, 116), (558, 289)
 CUSHION5 = (370, 302), (546, 302)
 #Bottom left
 CUSHION6 = (173, 302), (348, 302)
+ 
+##########################
 
 #Coords for cusions surrounding pockets
 S_CP_TL_1 = (160, 116), (152, 110)
