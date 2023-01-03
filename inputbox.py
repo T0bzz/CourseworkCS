@@ -3,7 +3,8 @@ import pygame
 
 
 class Inputbox():
-    def __init__(self):
+    def __init__(self, game):
+        self.game  = game
         self.angle_input = "Angle: 180"
         self.play = False
 
@@ -15,6 +16,8 @@ class Inputbox():
             if event.text in "0123456789.-":
                 if len(self.angle_input) <= 9:
                     self.angle_input += event.text
+            elif event.text == "#":
+                self.game.start()
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_BACKSPACE:
                 if len(self.angle_input) >= 8:

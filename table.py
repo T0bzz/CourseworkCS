@@ -54,7 +54,7 @@ class Table:
             for redball in self.redball:
                 self.space.add(redball.body, redball.shape, redball.pivot)
 
-        self.input_box = Inputbox()
+        self.input_box = Inputbox(game)
 
     #Calls the input_handler_angle function from input_box
     def input_handler(self, event):
@@ -86,10 +86,12 @@ class Table:
                self.input_box.angle_input, True, pygame.Color("turquoise"))
             self.display_surface.blit(text, text.get_rect())
             self.draw_line()
-        text_angle_type =   INPUT_FONT.render(self.angle_type(), True, pygame.Color("turquoise"))
+        text_angle_type = INPUT_FONT.render(self.angle_type(), True, pygame.Color("turquoise"))
         self.display_surface.blit(text_angle_type, (0, 35))
-        
-
+        text_instructions_1 = INPUT_FONT.render("Press '#' to return to the main menu", True, pygame.Color("turquoise"))
+        self.display_surface.blit(text_instructions_1, (150, 0))
+        text_instructions_2 = INPUT_FONT.render("Press 'ENTER' to fire the cueball", True, pygame.Color("turquoise"))
+        self.display_surface.blit(text_instructions_2, (150, 35))
 
    #Potts balls when the are in a given range, aswell as re-drawing the balls in certain positions based on the mode
     def pocket(self):
