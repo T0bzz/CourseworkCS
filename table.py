@@ -88,7 +88,7 @@ class Table:
             self.draw_line()
         text_angle_type = INPUT_FONT.render(self.angle_type(), True, pygame.Color("turquoise"))
         self.display_surface.blit(text_angle_type, (0, 35))
-        text_instructions_1 = INPUT_FONT.render("Press '#' to return to the main menu", True, pygame.Color("turquoise"))
+        text_instructions_1 = INPUT_FONT.render("Press 'SPACE' to return to the main menu", True, pygame.Color("turquoise"))
         self.display_surface.blit(text_instructions_1, (150, 0))
         text_instructions_2 = INPUT_FONT.render("Press 'ENTER' to fire the cueball", True, pygame.Color("turquoise"))
         self.display_surface.blit(text_instructions_2, (150, 35))
