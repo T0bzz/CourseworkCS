@@ -9,7 +9,7 @@ from inputbox import Inputbox
 
 
 class Table:
-    def __init__(self, game, engine, screen, display_surface, x, y, mode, settings, red_balls_potted, yellow_balls_potted):
+    def __init__(self, game, engine, screen, display_surface, x, y, mode, settings, red_balls_potted, yellow_balls_potted, level_balls):
         self.x = x
         self.y = y
         self.game = game
@@ -20,6 +20,7 @@ class Table:
         self.yellow_balls_potted = yellow_balls_potted
         self.mode = mode
         self.settings = settings
+        self.level_balls = level_balls
         self.display_surface = display_surface
         self.coords_potted = [0, 30, 60, 90, 120, 150, 180]
         self.direction = DIRECTION
@@ -36,7 +37,7 @@ class Table:
             self.yellowball = [Yellow_Ball(Yellow1, 5, self.static_body), Yellow_Ball(Yellow2, 5, self.static_body), Yellow_Ball(Yellow3, 5, self.static_body), Yellow_Ball(Yellow4, 5, self.static_body), Yellow_Ball(Yellow5, 5, self.static_body), Yellow_Ball(Yellow6, 5, self.static_body), Yellow_Ball(Yellow7, 5, self.static_body)]
             self.blackball = Black_Ball(Black1, 5, self.static_body)
         elif self.mode == 1:
-            self.redball = [Red_Ball(L_RED1, 5, self.static_body), Red_Ball(L_RED2, 5, self.static_body), Red_Ball(L_RED3, 5, self.static_body), Red_Ball(L_RED4, 5, self.static_body), Red_Ball(L_RED5, 5, self.static_body), Red_Ball(L_RED6, 5, self.static_body)]    
+            self.redball = [Red_Ball(level_balls[0], 5, self.static_body), Red_Ball(level_balls[1], 5, self.static_body), Red_Ball(level_balls[2], 5, self.static_body), Red_Ball(level_balls[3], 5, self.static_body), Red_Ball(level_balls[4], 5, self.static_body), Red_Ball(level_balls[5], 5, self.static_body)]    
         self.GameOver = self.Game_Over()
 
         #Adds objects to the pymunk space, allowing collisions to take place

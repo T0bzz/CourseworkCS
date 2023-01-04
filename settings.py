@@ -58,6 +58,6 @@ class Settings:
 	def go_back(self):
 		print("Back")
 		pygame.time.delay(100)
-		self.game.restart()
+		self.game.start()
 
 

@@ -6,14 +6,15 @@ from table import Table
 
 
 class Level:
-    def __init__(self, game, engine, mode, screen, display_surface, settings):
+    def __init__(self, game, engine, mode, screen, display_surface, settings, level_balls):
         self.game = game
         self.engine = engine
         self.mode = mode
         self.screen = screen
         self.display_surface = display_surface
         self.settings = settings
-        self.table = Table(self.game, self.engine, self.screen, self.display_surface, 0, 0, self.mode, self.settings, 0, 0)
+        self.level_balls = level_balls
+        self.table = Table(self.game, self.engine, self.screen, self.display_surface, 0, 0, self.mode, self.settings, 0, 0, self.level_balls)
 
     #Calls the input handler from the table class
     def input_handler(self, event):

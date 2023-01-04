@@ -150,16 +150,3 @@ YELLOWS = (187, 362)
 
 
 
-
-
-#Coords needed for the level
-
-L_RED1 = (random.randint(167, 549), random.randint(112, 290))
-L_RED2 = (random.randint(167, 549), random.randint(112, 290))
-L_RED3 = (random.randint(167, 549), random.randint(112, 290))
-L_RED4 = (random.randint(167, 549), random.randint(112, 290))
-L_RED5 = (random.randint(167, 549), random.randint(112, 290))
-L_RED6 = (random.randint(167, 549), random.randint(112, 290))
-
-
-

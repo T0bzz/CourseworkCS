@@ -61,7 +61,11 @@ class MainMenu:
 
     #Sets the current mode in the game class as level, and passes in necessary parameters
     def start_level(self):
-        self.game.current_mode = Level(self.game, self.engine, 1, self.screen, self.display_surface, self.settings)
+        level_balls = []
+        for i in range(6):
+            level_red_pos = (random.randint(167, 549), random.randint(112, 290))
+            level_balls.append(level_red_pos)
+        self.game.current_mode = Level(self.game, self.engine, 1, self.screen, self.display_surface, self.settings, level_balls)
 
     #Sets the current mode in the game class as settings, and passes in necessary parameters
     def start_settings(self):
