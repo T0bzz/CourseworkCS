@@ -71,7 +71,7 @@ INPUT_FONT = SysFont(None, 32)
 #Cushions coords
 
 #Left side
-CUSHION1 = (156, 116), (156, 289)
+CUSHION1 = (164, 116), (164, 289)
 #Top left
 CUSHION2 = (173, 98), (348, 98)
 #Top Right

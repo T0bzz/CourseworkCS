@@ -94,6 +94,13 @@ class Table:
         text_instructions_2 = INPUT_FONT.render("Press 'ENTER' to fire the cueball", True, pygame.Color("turquoise"))
         self.display_surface.blit(text_instructions_2, (150, 35))
 
+        pygame.draw.line(self.display_surface, WHITE, (164, 116), (164, 289))
+        pygame.draw.line(self.display_surface, WHITE, (173, 106), (348, 106))
+        pygame.draw.line(self.display_surface, WHITE, (370, 106), (546, 106))
+        pygame.draw.line(self.display_surface, WHITE, (554, 116), (554, 289))
+        pygame.draw.line(self.display_surface, WHITE, (370, 298), (546, 298))
+        pygame.draw.line(self.display_surface, WHITE, (173, 298), (348, 298))
+
    #Potts balls when the are in a given range, aswell as re-drawing the balls in certain positions based on the mode
     def pocket(self):
         #Red and yellow balls
@@ -175,9 +182,10 @@ class Table:
                 cue_y_dist = abs((self.cueball.body.position.y) - (pocket[1]))
                 cue_dist = math.sqrt((cue_x_dist**2) + (cue_y_dist**2))
                 if cue_dist < POCKET_RADIUS:
-                    #print("self.cueball.image")
-                    self.cueball.body.position = (260 - BALL_RADIUS * 2, 209 - BALL_RADIUS * 2)
+                    self.cueball.body.position = (5, 70)
                     self.cueball.body.velocity = (0, 0)
+                    if self.ball_velocity() == True:
+                        self.cueball.body.position = (260 - BALL_RADIUS * 2, 209 - BALL_RADIUS * 2)
             for pocket in pocket_coords:
                 black_x_dist = abs((self.blackball.body.position.x) - (pocket[0]))
                 black_y_dist = abs((self.blackball.body.position.y) - (pocket[1]))
@@ -223,6 +231,7 @@ class Table:
             cue_y_dist = abs((self.cueball.body.position.y) - (pocket[1]))
             cue_dist = math.sqrt((cue_x_dist**2) + (cue_y_dist**2))
             if cue_dist < POCKET_RADIUS:
+                self.cueball.body.position = (5,  70)
                 self.cueball.body.velocity = (0, 0)
                 if self.ball_velocity() == True:
                     self.cueball.body.position = (260 - BALL_RADIUS * 2, 209 - BALL_RADIUS * 2)
