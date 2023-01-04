@@ -17,7 +17,7 @@ class Freeplay:
         #Creates a variable for the settings class which is defined before. This method is used so the settings class does not have to be re-ran and avoiding overwritting the variables
         self.settings = settings
         #Creates a variable for and runs the Table class with necessary parameters passed in
-        self.table = Table(self.game, self.engine, self.screen, self.display_surface, 0, 0, self.mode, self.settings, 0, 0)
+        self.table = Table(self.game, self.engine, self.screen, self.display_surface, 0, 0, self.mode, self.settings, 0, 0, 0)
 
         #Calls the function input_handler from the table class with event passed is as a parameter
     def input_handler(self, event):
