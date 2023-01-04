@@ -175,9 +175,11 @@ class Table:
                 cue_y_dist = abs((self.cueball.body.position.y) - (pocket[1]))
                 cue_dist = math.sqrt((cue_x_dist**2) + (cue_y_dist**2))
                 if cue_dist < POCKET_RADIUS:
-                    #print("self.cueball.image")
-                    self.cueball.body.position = (260 - BALL_RADIUS * 2, 209 - BALL_RADIUS * 2)
+                    self.cueball.body.position = (5,70)
                     self.cueball.body.velocity = (0, 0)
+                    if self.ball_velocity() == True:
+                        self.cueball.body.position = (260 - BALL_RADIUS * 2, 209 - BALL_RADIUS * 2)
+                        self.cueball.body.velocity = (0, 0)
             for pocket in pocket_coords:
                 black_x_dist = abs((self.blackball.body.position.x) - (pocket[0]))
                 black_y_dist = abs((self.blackball.body.position.y) - (pocket[1]))
@@ -223,6 +225,7 @@ class Table:
             cue_y_dist = abs((self.cueball.body.position.y) - (pocket[1]))
             cue_dist = math.sqrt((cue_x_dist**2) + (cue_y_dist**2))
             if cue_dist < POCKET_RADIUS:
+                self.cueball.body.position = (0, 70)
                 self.cueball.body.velocity = (0, 0)
                 if self.ball_velocity() == True:
                     self.cueball.body.position = (260 - BALL_RADIUS * 2, 209 - BALL_RADIUS * 2)
