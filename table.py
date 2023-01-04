@@ -94,12 +94,25 @@ class Table:
         text_instructions_2 = INPUT_FONT.render("Press 'ENTER' to fire the cueball", True, pygame.Color("turquoise"))
         self.display_surface.blit(text_instructions_2, (150, 35))
 
-        pygame.draw.line(self.display_surface, WHITE, (164, 116), (164, 289))
-        pygame.draw.line(self.display_surface, WHITE, (173, 106), (348, 106))
-        pygame.draw.line(self.display_surface, WHITE, (370, 106), (546, 106))
-        pygame.draw.line(self.display_surface, WHITE, (554, 116), (554, 289))
-        pygame.draw.line(self.display_surface, WHITE, (370, 298), (546, 298))
-        pygame.draw.line(self.display_surface, WHITE, (173, 298), (348, 298))
+        # pygame.draw.line(self.display_surface, WHITE, (156, 116), (156, 289))
+        # pygame.draw.line(self.display_surface, WHITE, (173, 99), (348, 99))
+        # pygame.draw.line(self.display_surface, WHITE, (370, 99), (546, 99))
+        # pygame.draw.line(self.display_surface, WHITE, (554, 116), (554, 289))
+        # pygame.draw.line(self.display_surface, WHITE, (370, 298), (546, 298))
+        # pygame.draw.line(self.display_surface, WHITE, (173, 298), (348, 298))
+
+        # pygame.draw.line(self.display_surface, WHITE, (155, 116), (152, 110))
+        # pygame.draw.line(self.display_surface, WHITE, (173, 98), (167, 95))
+        # pygame.draw.line(self.display_surface, WHITE, (348, 98), (349, 95))
+        # pygame.draw.line(self.display_surface, WHITE, (370, 98), (369, 95))
+        # pygame.draw.line(self.display_surface, WHITE, (555, 116), (566, 110))
+        # pygame.draw.line(self.display_surface, WHITE, (546, 98), (552, 95))
+        # pygame.draw.line(self.display_surface, WHITE, (555, 289), (566, 294))
+        # pygame.draw.line(self.display_surface, WHITE, (546, 299), (552, 308))
+        # pygame.draw.line(self.display_surface, WHITE, (348, 299), (349, 309))
+        # pygame.draw.line(self.display_surface, WHITE, (370, 299), (369, 308))
+        # pygame.draw.line(self.display_surface, WHITE, (155, 289), (152, 294))
+        # pygame.draw.line(self.display_surface, WHITE, (173, 299), (167, 308))
 
    #Potts balls when the are in a given range, aswell as re-drawing the balls in certain positions based on the mode
     def pocket(self):
@@ -184,8 +197,6 @@ class Table:
                 if cue_dist < POCKET_RADIUS:
                     self.cueball.body.position = (5, 70)
                     self.cueball.body.velocity = (0, 0)
-                    if self.ball_velocity() == True:
-                        self.cueball.body.position = (260 - BALL_RADIUS * 2, 209 - BALL_RADIUS * 2)
             for pocket in pocket_coords:
                 black_x_dist = abs((self.blackball.body.position.x) - (pocket[0]))
                 black_y_dist = abs((self.blackball.body.position.y) - (pocket[1]))
@@ -226,15 +237,14 @@ class Table:
                             ball.body.velocity = (0, 0)
                         self.red_increment += 1
                         self.red_balls_potted += 1
-        for pocket in pocket_coords:
-            cue_x_dist = abs((self.cueball.body.position.x) - (pocket[0]))
-            cue_y_dist = abs((self.cueball.body.position.y) - (pocket[1]))
-            cue_dist = math.sqrt((cue_x_dist**2) + (cue_y_dist**2))
-            if cue_dist < POCKET_RADIUS:
-                self.cueball.body.position = (5,  70)
-                self.cueball.body.velocity = (0, 0)
-                if self.ball_velocity() == True:
-                    self.cueball.body.position = (260 - BALL_RADIUS * 2, 209 - BALL_RADIUS * 2)
+                cue_x_dist = abs((self.cueball.body.position.x) - (pocket[0]))
+                cue_y_dist = abs((self.cueball.body.position.y) - (pocket[1]))
+                cue_dist = math.sqrt((cue_x_dist**2) + (cue_y_dist**2))
+                if cue_dist < POCKET_RADIUS:
+                    self.cueball.body.position = (5, 70)
+                    self.cueball.body.velocity = (0, 0)
+        if self.ball_velocity() == True and self.cueball.body.position == (5, 70):
+            self.cueball.body.position = (260 - BALL_RADIUS * 2, 209 - BALL_RADIUS * 2)
                     
     #This function is used to detirmine whther or not the balls are stationary
     def ball_velocity(self):
@@ -293,7 +303,7 @@ class Table:
     #This subroutine is used to continuously update the game, calling necessary functions constantly, allowing the program to run animations smoothly and run checks such as check potted constantly
     def update(self):
         self.pocket()
-        self.space.step(1/520)
+        self.space.step(1/540)
         self.draw_line()
         self.angle_type()
         if self.input_box.play and self.ball_velocity() == True:
