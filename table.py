@@ -93,26 +93,7 @@ class Table:
         self.display_surface.blit(text_instructions_1, (150, 0))
         text_instructions_2 = INPUT_FONT.render("Press 'ENTER' to fire the cueball", True, pygame.Color("turquoise"))
         self.display_surface.blit(text_instructions_2, (150, 35))
-
-        # pygame.draw.line(self.display_surface, WHITE, (156, 116), (156, 289))
-        # pygame.draw.line(self.display_surface, WHITE, (173, 99), (348, 99))
-        # pygame.draw.line(self.display_surface, WHITE, (370, 99), (546, 99))
-        # pygame.draw.line(self.display_surface, WHITE, (554, 116), (554, 289))
-        # pygame.draw.line(self.display_surface, WHITE, (370, 298), (546, 298))
-        # pygame.draw.line(self.display_surface, WHITE, (173, 298), (348, 298))
-
-        # pygame.draw.line(self.display_surface, WHITE, (155, 116), (152, 110))
-        # pygame.draw.line(self.display_surface, WHITE, (173, 98), (167, 95))
-        # pygame.draw.line(self.display_surface, WHITE, (348, 98), (349, 95))
-        # pygame.draw.line(self.display_surface, WHITE, (370, 98), (369, 95))
-        # pygame.draw.line(self.display_surface, WHITE, (555, 116), (566, 110))
-        # pygame.draw.line(self.display_surface, WHITE, (546, 98), (552, 95))
-        # pygame.draw.line(self.display_surface, WHITE, (555, 289), (566, 294))
-        # pygame.draw.line(self.display_surface, WHITE, (546, 299), (552, 308))
-        # pygame.draw.line(self.display_surface, WHITE, (348, 299), (349, 309))
-        # pygame.draw.line(self.display_surface, WHITE, (370, 299), (369, 308))
-        # pygame.draw.line(self.display_surface, WHITE, (155, 289), (152, 294))
-        # pygame.draw.line(self.display_surface, WHITE, (173, 299), (167, 308))
+            
 
    #Potts balls when the are in a given range, aswell as re-drawing the balls in certain positions based on the mode
     def pocket(self):
@@ -120,9 +101,7 @@ class Table:
         if self.mode == -1:
             for pocket in pocket_coords:
                 for ball in self.redball:
-                    red_x_dist = abs((ball.body.position.x) - (pocket[0]))
-                    red_y_dist = abs((ball.body.position.y) - (pocket[1]))
-                    red_dist = math.sqrt((red_x_dist**2) + (red_y_dist**2))
+                    red_dist = math.sqrt((abs((ball.body.position.x)-pocket[0])**2) + (abs((ball.body.position.y) - (pocket[1]))**2))
                     if red_dist < POCKET_RADIUS:
                         if self.red_increment == 0:
                             add_coord = self.coords_potted[0]
@@ -156,9 +135,7 @@ class Table:
                         self.red_balls_potted += 1
             for pocket in pocket_coords:
                 for ball in self.yellowball:
-                    yellow_x_dist = abs((ball.body.position.x) - (pocket[0]))
-                    yellow_y_dist = abs((ball.body.position.y) - (pocket[1]))
-                    yellow_dist = math.sqrt((yellow_x_dist**2) + (yellow_y_dist**2))
+                    yellow_dist = math.sqrt((abs((ball.body.position.x) - (pocket[0]))**2) + (abs((ball.body.position.y) - (pocket[1]))**2))
                     if yellow_dist < POCKET_RADIUS:
                         if self.yellow_increment == 0:
                             add_coord = self.coords_potted[0]
@@ -191,25 +168,19 @@ class Table:
                         self.yellow_increment += 1
                         self.yellow_balls_potted += 1
             for pocket in pocket_coords:
-                cue_x_dist = abs((self.cueball.body.position.x) - (pocket[0]))
-                cue_y_dist = abs((self.cueball.body.position.y) - (pocket[1]))
-                cue_dist = math.sqrt((cue_x_dist**2) + (cue_y_dist**2))
+                cue_dist = math.sqrt((abs((self.cueball.body.position.x) - (pocket[0]))**2) + (abs((self.cueball.body.position.y) - (pocket[1]))**2))
                 if cue_dist < POCKET_RADIUS:
                     self.cueball.body.position = (5, 70)
                     self.cueball.body.velocity = (0, 0)
             for pocket in pocket_coords:
-                black_x_dist = abs((self.blackball.body.position.x) - (pocket[0]))
-                black_y_dist = abs((self.blackball.body.position.y) - (pocket[1]))
-                black_dist = math.sqrt((black_x_dist**2) + (black_y_dist**2))
+                black_dist = math.sqrt((abs((self.blackball.body.position.x) - (pocket[0]))**2) + (abs((self.blackball.body.position.y) - (pocket[1]))**2))
                 if black_dist < POCKET_RADIUS:
                     self.blackball.body.position = (618, 200)
                     self.blackball.body.velocity = (0, 0)
         elif self.mode == 1:
             for pocket in pocket_coords:
                 for ball in self.redball:
-                    red_x_dist = abs((ball.body.position.x) - (pocket[0]))
-                    red_y_dist = abs((ball.body.position.y) - (pocket[1]))
-                    red_dist = math.sqrt((red_x_dist**2) + (red_y_dist**2))
+                    red_dist = math.sqrt((abs((ball.body.position.x) - (pocket[0]))**2) + (abs((ball.body.position.y) - (pocket[1]))**2))
                     if red_dist < POCKET_RADIUS:
                         if self.red_increment == 0:
                             add_coord = self.coords_potted[0]
@@ -237,9 +208,7 @@ class Table:
                             ball.body.velocity = (0, 0)
                         self.red_increment += 1
                         self.red_balls_potted += 1
-                cue_x_dist = abs((self.cueball.body.position.x) - (pocket[0]))
-                cue_y_dist = abs((self.cueball.body.position.y) - (pocket[1]))
-                cue_dist = math.sqrt((cue_x_dist**2) + (cue_y_dist**2))
+                cue_dist = math.sqrt((abs((self.cueball.body.position.x) - (pocket[0]))**2) + (abs((self.cueball.body.position.y) - (pocket[1]))**2))
                 if cue_dist < POCKET_RADIUS:
                     self.cueball.body.position = (5, 70)
                     self.cueball.body.velocity = (0, 0)
