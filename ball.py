@@ -6,6 +6,7 @@ import pymunk
 from math import sin, cos, radians
 
 #Creates the class Cueball which defines the image and properties of the object using the pymunk library
+# Class A use of OOP programming with polymorphism and inheritence
 class Cueball:
     def __init__(self, x, y, mass, static_body):
         self.x = x 

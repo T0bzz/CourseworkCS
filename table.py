@@ -7,7 +7,7 @@ from cushion import Cushion
 from ball import Cueball, Red_Ball, Yellow_Ball, Black_Ball
 from inputbox import Inputbox
 
-
+#Class B Simple OOP Model
 class Table:
     def __init__(self, game, engine, screen, display_surface, x, y, mode, settings, red_balls_potted, yellow_balls_potted, level_balls):
         self.x = x
@@ -24,6 +24,8 @@ class Table:
         self.display_surface = display_surface
         self.coords_potted = [0, 30, 60, 90, 120, 150, 180]
         self.direction = DIRECTION
+        
+        #Class B multi-dimensional arrays
         self.cushions = [Cushion(CUSHION1), Cushion(CUSHION2), Cushion(
             CUSHION3), Cushion(CUSHION4), Cushion(CUSHION5), Cushion(CUSHION6), Cushion(S_CP_TL_1), Cushion(S_CP_TL_2), Cushion(S_MP_T_1), Cushion(S_MP_T_2), Cushion(S_CP_TR_1), Cushion(S_CP_TR_2), Cushion(S_CP_BR_1), Cushion(S_CP_BR_2), Cushion(S_MP_B_1), Cushion(S_MP_B_2), Cushion(S_CP_BL_1), Cushion(S_CP_BL_2)]
         self.space = pymunk.Space()
@@ -96,13 +98,14 @@ class Table:
             
 
    #Potts balls when the are in a given range, aswell as re-drawing the balls in certain positions based on the mode
+   #Class B simple mathematics
     def pocket(self):
         #Red and yellow balls
         if self.mode == -1:
             for pocket in pocket_coords:
                 for ball in self.redball:
-                    red_dist = math.sqrt((abs((ball.body.position.x)-pocket[0])**2) + (abs((ball.body.position.y) - (pocket[1]))**2))
-                    if red_dist < POCKET_RADIUS:
+                    Red_potted = math.sqrt((abs((ball.body.position.x)-pocket[0])**2) + (abs((ball.body.position.y) - (pocket[1]))**2))
+                    if Red_potted < POCKET_RADIUS:
                         if self.red_increment == 0:
                             add_coord = self.coords_potted[0]
                             ball.body.position = (REDS[0] + add_coord, REDS[1])
@@ -135,8 +138,8 @@ class Table:
                         self.red_balls_potted += 1
             for pocket in pocket_coords:
                 for ball in self.yellowball:
-                    yellow_dist = math.sqrt((abs((ball.body.position.x) - (pocket[0]))**2) + (abs((ball.body.position.y) - (pocket[1]))**2))
-                    if yellow_dist < POCKET_RADIUS:
+                    Yellow_potted = math.sqrt((abs((ball.body.position.x) - (pocket[0]))**2) + (abs((ball.body.position.y) - (pocket[1]))**2))
+                    if Yellow_potted < POCKET_RADIUS:
                         if self.yellow_increment == 0:
                             add_coord = self.coords_potted[0]
                             ball.body.position = (YELLOWS[0] + add_coord, YELLOWS[1])
@@ -168,20 +171,20 @@ class Table:
                         self.yellow_increment += 1
                         self.yellow_balls_potted += 1
             for pocket in pocket_coords:
-                cue_dist = math.sqrt((abs((self.cueball.body.position.x) - (pocket[0]))**2) + (abs((self.cueball.body.position.y) - (pocket[1]))**2))
-                if cue_dist < POCKET_RADIUS:
+                Cue_potted = math.sqrt((abs((self.cueball.body.position.x) - (pocket[0]))**2) + (abs((self.cueball.body.position.y) - (pocket[1]))**2))
+                if Cue_potted < POCKET_RADIUS:
                     self.cueball.body.position = (5, 70)
                     self.cueball.body.velocity = (0, 0)
             for pocket in pocket_coords:
-                black_dist = math.sqrt((abs((self.blackball.body.position.x) - (pocket[0]))**2) + (abs((self.blackball.body.position.y) - (pocket[1]))**2))
-                if black_dist < POCKET_RADIUS:
+                Black_potted = math.sqrt((abs((self.blackball.body.position.x) - (pocket[0]))**2) + (abs((self.blackball.body.position.y) - (pocket[1]))**2))
+                if Black_potted < POCKET_RADIUS:
                     self.blackball.body.position = (618, 200)
                     self.blackball.body.velocity = (0, 0)
         elif self.mode == 1:
             for pocket in pocket_coords:
                 for ball in self.redball:
-                    red_dist = math.sqrt((abs((ball.body.position.x) - (pocket[0]))**2) + (abs((ball.body.position.y) - (pocket[1]))**2))
-                    if red_dist < POCKET_RADIUS:
+                    Red_potted = math.sqrt((abs((ball.body.position.x) - (pocket[0]))**2) + (abs((ball.body.position.y) - (pocket[1]))**2))
+                    if Red_potted < POCKET_RADIUS:
                         if self.red_increment == 0:
                             add_coord = self.coords_potted[0]
                             ball.body.position = (REDS[0] + add_coord, REDS[1])
@@ -208,8 +211,8 @@ class Table:
                             ball.body.velocity = (0, 0)
                         self.red_increment += 1
                         self.red_balls_potted += 1
-                cue_dist = math.sqrt((abs((self.cueball.body.position.x) - (pocket[0]))**2) + (abs((self.cueball.body.position.y) - (pocket[1]))**2))
-                if cue_dist < POCKET_RADIUS:
+                Cue_potted = math.sqrt((abs((self.cueball.body.position.x) - (pocket[0]))**2) + (abs((self.cueball.body.position.y) - (pocket[1]))**2))
+                if Cue_potted < POCKET_RADIUS:
                     self.cueball.body.position = (5, 70)
                     self.cueball.body.velocity = (0, 0)
         if self.ball_velocity() == True and self.cueball.body.position == (5, 70):
@@ -230,9 +233,7 @@ class Table:
     def Game_Over(self):
         GameOver = False
         if self.mode == -1:
-            if self.red_balls_potted != 7 and self.yellow_balls_potted != 7 and self.blackball.body.position == (618, 200):
-                GameOver = True
-            elif self.red_balls_potted == 7 and self.yellow_balls_potted == 7 and self.blackball.body.position == (618, 200):
+            if self.blackball.body.position == (618, 200):
                 GameOver = True
             else:
                 pass

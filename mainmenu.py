@@ -19,6 +19,7 @@ class MainMenu:
         self.settings = settings
 
         #Gets the folders and files needed to draw the images
+        #Class B Files organised for sequential access
         folders = os.listdir(BUTTONS_FOLDER)
         for folder in folders:
             BUTTONS[folder] = (pygame.image.load(path.join(BUTTONS_FOLDER, folder, "primary.png")).convert_alpha(

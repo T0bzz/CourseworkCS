@@ -5,6 +5,7 @@ import codecs
 from os import path
 import random
 
+#Class C appropriate use od simple data types
 # Colour
 BLACK = (0, 0, 0)
 BLUE = (0, 0, 255)
