@@ -1,7 +1,7 @@
 import pygame
 import pymunk
 import math
-from math import cos, sin, tan, radians
+from math import cos, sin, radians
 from config import *
 from cushion import Cushion
 from ball import Cueball, Red_Ball, Yellow_Ball, Black_Ball
