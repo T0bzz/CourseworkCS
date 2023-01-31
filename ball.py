@@ -6,7 +6,7 @@ import pymunk
 from math import sin, cos, radians
 
 #Creates the class Cueball which defines the image and properties of the object using the pymunk library
-# Class A use of OOP programming with polymorphism and inheritence
+#########################################Class A use of OOP programming with polymorphism and inheritence##################################
 class Cueball:
     def __init__(self, x, y, mass, static_body):
         self.x = x 
@@ -23,7 +23,7 @@ class Cueball:
         #Cretes a pivot joint used to replicate friction acting on the pymunk objects
         self.pivot = pymunk.PivotJoint(static_body, self.body, (0, 0), (0, 0))
         self.pivot.max_bias = 0
-        self.pivot.max_force = 1200
+        self.pivot.max_force = 2000
         self.force = FORCE
         
     #Function used to apply a force on the cudeball object based upon the angle inputed by the user

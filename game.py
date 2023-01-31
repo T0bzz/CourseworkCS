@@ -44,6 +44,4 @@ class Game:
 
                 pygame.quit()
                 exit(0)
-    #This function is used to re-run the main menu in certain conditions, for example when the black ball is potted
-    #def restart(self):
-    #    self.current_mode = self.mainmenu
+    

@@ -7,7 +7,7 @@ from cushion import Cushion
 from ball import Cueball, Red_Ball, Yellow_Ball, Black_Ball
 from inputbox import Inputbox
 
-#Class B Simple OOP Model
+########################################Class B Simple OOP Model######################################################
 class Table:
     def __init__(self, game, engine, screen, display_surface, x, y, mode, settings, red_balls_potted, yellow_balls_potted, level_balls):
         self.x = x
@@ -25,7 +25,7 @@ class Table:
         self.coords_potted = [0, 30, 60, 90, 120, 150, 180]
         self.direction = DIRECTION
         
-        #Class B multi-dimensional arrays
+        ##################################Class B multi-dimensional arrays############################################
         self.cushions = [Cushion(CUSHION1), Cushion(CUSHION2), Cushion(
             CUSHION3), Cushion(CUSHION4), Cushion(CUSHION5), Cushion(CUSHION6), Cushion(S_CP_TL_1), Cushion(S_CP_TL_2), Cushion(S_MP_T_1), Cushion(S_MP_T_2), Cushion(S_CP_TR_1), Cushion(S_CP_TR_2), Cushion(S_CP_BR_1), Cushion(S_CP_BR_2), Cushion(S_MP_B_1), Cushion(S_MP_B_2), Cushion(S_CP_BL_1), Cushion(S_CP_BL_2)]
         self.space = pymunk.Space()
@@ -98,7 +98,9 @@ class Table:
             
 
    #Potts balls when the are in a given range, aswell as re-drawing the balls in certain positions based on the mode
-   #Class B simple mathematics
+   ####################################Class B simple mathematics###################################################
+   # This technique of using pythagorus in combination with the range coordinates for the balls and pockets has also been used in he link provided below:
+   # https://www.youtube.com/watch?v=txcOqDhrwBo&t=5050s
     def pocket(self):
         #Red and yellow balls
         if self.mode == -1:
@@ -284,6 +286,7 @@ class Table:
         if self.input_box.play:
             self.input_box.play = False
         if self.Game_Over() == True:
+            pygame.time.wait(100)
             self.game.start()
         
 
